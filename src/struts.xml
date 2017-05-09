@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="formulamind" extends="struts-default" namespace="/">
+	
+	</package>
+
+	<!-- supplier的action包 -->
+	<package name="supplier" extends="formulamind" namespace="/">
+		<action name="supplierlist" class="supplierAction" method="supplierList">
+			<result name="supplierlist">supplier/index.jsp</result>
+		</action>
+		<action name="toaddSupplier" class="supplierAction" method="toAddSupplier">
+			<result name="supplier_add">supplier/add.jsp</result>
+		</action>
+		<action name="addSupplier" class="supplierAction" method="addSupplier">
+			<result name="supplierlist" type="redirectAction">supplierlist</result>
+			<result name="input">supplier/add.jsp</result>
+		</action>
+		<action name="toSupplierModify" class="supplierAction" method="toSupplierModify">
+			<result name="supplier_modify">supplier/update.jsp</result>
+		</action>
+		<action name="doSupplierModify" class="supplierAction" method="doSupplierModify">
+			<result name="supplierlist" type="redirectAction">supplierlist</result>
+		</action>
+		<action name="deleteSupplier" class="supplierAction" method="deleteSupplier">
+			<result name="supplierlist" type="redirectAction">supplierlist</result>
+		</action>
+		<action name="supplierDetails" class="supplierAction" method="supplierDetails">
+			<result name="supplierDetails">supplier/details.jsp</result>
+		</action>
+	</package>
+	<!-- chemical的action包 -->
+	<package name="chemical" extends="formulamind" namespace="/">
+		<action name="chemicallist" class="chemicalAction" method="chemicalList">
+			<result name="chemicallist">chemical/index.jsp</result>
+		</action>
+		<action name="toAddChemical" class="chemicalAction" method="toAddChemical">
+			<result name="chemical_add">chemical/add.jsp</result>
+		</action>
+		<action name="addChemical" class="chemicalAction" method="addChemical">
+			<result name="chemicallist" type="redirectAction">chemicallist</result>
+		</action>
+	</package>
+</struts>    

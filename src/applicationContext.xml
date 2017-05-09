@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/formula_mind">
+		</property>
+		<property name="username" value="sean"></property>
+		<property name="password" value="443414"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>
+					au/com/phytoline/entity/BatchDetails.hbm.xml
+				</value>
+				<value>au/com/phytoline/entity/Chemical.hbm.xml</value>
+				<value>
+					au/com/phytoline/entity/ProductDetails.hbm.xml
+				</value>
+				<value>au/com/phytoline/entity/Supplier.hbm.xml</value>
+				<value>au/com/phytoline/entity/Product.hbm.xml</value>
+				<value>au/com/phytoline/entity/Batch.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 定义事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!--定义切面，并将事务通知和切面组合（定义哪些方法应用事务规则） -->
+	<aop:config>
+		<!-- 对com.news.biz包下的所有类的所有方法都应用事务规则 -->
+		<aop:pointcut id="bizMethods"
+			expression="execution(* au.com.phytoline.service.*.*(..))" />
+		<!-- 将事务通知和切面组合 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bizMethods" />
+	</aop:config>
+	<!-- 声明Hibernate事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<!-- -->
+	<bean id="supplierDAO" class="au.com.phytoline.dao.impl.SupplierDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="supplierService" class="au.com.phytoline.service.impl.SupplierServiceImpl">
+		<property name="supplierDAO" ref="supplierDAO" />
+	</bean>
+	<bean id="supplierAction" class="au.com.phytoline.action.SupplierAction"
+		scope="prototype">
+		<property name="supplierService" ref="supplierService" />
+	</bean>
+
+	<!-- -->
+	<bean id="chemicalDAO" class="au.com.phytoline.dao.impl.ChemicalDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="chemicalService" class="au.com.phytoline.service.impl.ChemicalServiceImpl">
+		<property name="chemicalDAO" ref="chemicalDAO" />
+	</bean>
+	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction">
+		<property name="chemicalService" ref="chemicalService" />
+		<property name="supplierService" ref="supplierService" />
+	</bean>
+</beans> 

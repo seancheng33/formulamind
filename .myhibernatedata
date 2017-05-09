@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Wed May 03 21:57:40 CST 2017
+genBasicCompId=false
+sessionFactoryName=
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=native
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/FormulaMind/hibernate.reveng.xml
+configFile=/FormulaMind/src/applicationContext.xml
+createConfigFile=true
