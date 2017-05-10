@@ -13,11 +13,20 @@ import au.com.phytoline.service.ChemicalService;
 import au.com.phytoline.service.SupplierService;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+//TODO 准备重做
 public class ChemicalAction extends ActionSupport implements RequestAware,
 		SessionAware {
 	private static final long serialVersionUID = 5798979308504675280L;
 	Chemical chemical;
+	//Supplier supplier;
+//	public Supplier getSupplier() {
+//		return supplier;
+//	}
+//
+//	public void setSupplier(Supplier supplier) {
+//		this.supplier = supplier;
+//	}
+
 	Pager pager;
 	ChemicalService chemicalService;
 	SupplierService supplierService;
@@ -117,7 +126,6 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 
 	public String addChemical() throws Exception {
 		Supplier supplier = supplierService.getSupplierById(sid);
-
 		chemical.setSupplier(supplier);
 		chemicalService.addChemical(chemical);
 		return "chemicallist";

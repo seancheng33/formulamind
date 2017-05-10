@@ -43,6 +43,7 @@
 		</action>
 		<action name="addChemical" class="chemicalAction" method="addChemical">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
+			<result name="input">chemical/add.jsp</result>
 		</action>
 	</package>
 </struts>    

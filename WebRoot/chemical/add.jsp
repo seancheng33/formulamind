@@ -31,7 +31,7 @@
 					<hr>
 				</div>
 						<s:textfield label="Chemical Name" name="chemical.cname" />
-						<s:select label="Supplier Name" list="#request.supplierList" name="chemical.supplier.sname"
+						<s:select label="Supplier Name" list="#request.supplierList" name="sid"
 						listKey="sid" listValue="sname" ></s:select>
 						<s:textfield label="Price" name="chemical.price" />
 					</s:form>

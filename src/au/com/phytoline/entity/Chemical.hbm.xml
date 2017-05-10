@@ -10,7 +10,7 @@
             <column name="cid" />
             <generator class="native"></generator>
         </id>
-        <many-to-one name="supplier" class="au.com.phytoline.entity.Supplier" fetch="select">
+        <many-to-one name="supplier" class="au.com.phytoline.entity.Supplier" fetch="select" lazy="false">
             <column name="sid" />
         </many-to-one>
         <property name="cname" type="java.lang.String">

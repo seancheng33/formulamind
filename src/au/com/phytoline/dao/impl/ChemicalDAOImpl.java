@@ -63,7 +63,7 @@ public class ChemicalDAOImpl implements ChemicalDAO {
 	@Override
 	public void addChemial(Chemical chemical) {
 		Session session =sessionFactory.getCurrentSession();
-		session.save(chemical);
+		session.saveOrUpdate(chemical);
 	}
 
 }
