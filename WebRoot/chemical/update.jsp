@@ -15,36 +15,33 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="container-fluid">
-	<jsp:include page="../left.jsp" />
+		<jsp:include page="../left.jsp" />
 
-	<div class="span9">
-		<h1 class="page-title">Edit Supplier</h1>
-		<div class="well">
-			<div id="myTabContent" class="tab-content">
-				<div class="tab-pane active in" id="home">
-	<s:form action="/doSupplierModify" method="post">
-										<div class="btn-toolbar">
-					<button type="submit" class="btn btn-primary"> <i class="icon-save"></i>
-						Modify
-					</button> <a href="supplierlist" class="btn">Cancel</a>
-					<div class="btn-group"></div>
-					<hr>
+		<div class="span9">
+			<h1 class="page-title">Edit Chemical</h1>
+			<div class="well">
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane active in" id="home">
+						<s:form action="/doChemicalModify" method="post">
+							<div class="btn-toolbar">
+								<button type="submit" class="btn btn-primary">
+									<i class="icon-save"></i> Modify
+								</button>
+								<a href="chemicallist" class="btn">Cancel</a>
+								<div class="btn-group"></div>
+								<hr>
+							</div>
+							<s:hidden name="chemical.cid" value="%{#request.chemical.cid}" />
+							<s:textfield label="Chemical Name" name="chemical.cname" />
+							<s:select label="Supplier Name" list="#request.supplierList"
+								name="sid" listKey="sid" listValue="sname" value="chemical.supplier.sid"></s:select>
+							<s:textfield label="Price" name="chemical.price" />
+						</s:form>
 					</div>
-	<s:hidden name="supplier.sid" value="%{#request.supplier.sid}" />
-	<s:hidden name="supplier.screatedate" value="%{#request.supplier.screatedate}" />
-		<s:textfield label="Supplier Name" name="supplier.sname" value="%{#request.supplier.sname}"/>
-		<s:textfield label="Address" name="supplier.address" value="%{#request.supplier.address}"/>
-		<s:textfield label="Suburb" name="supplier.suburb" value="%{#request.supplier.suburb}"/>
-		<s:textfield label="Postcode" name="supplier.postcode" value="%{#request.supplier.postcode}"/>
-		<s:textfield label="Phone" name="supplier.phone" value="%{#request.supplier.phone}"/>
-		<s:textfield label="Fax" name="supplier.fax" value="%{#request.supplier.fax}"/>
-		<s:textfield label="Contact" name="supplier.contact" value="%{#request.supplier.contact}" />
-<!-- 		<s:submit value="Update Supplier"></s:submit> -->
-	</s:form>
-	</div>
+				</div>
 			</div>
 		</div>
-	</div></div>
+	</div>
 	<footer>
 		<jsp:include page="../footer.jsp" />
 	</footer>

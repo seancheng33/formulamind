@@ -81,6 +81,15 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	}
 
 	Map<String, Object> request;
+	int cid;
+
+	public int getCid() {
+		return cid;
+	}
+
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
@@ -120,6 +129,29 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		Supplier supplier = supplierService.getSupplierById(sid);
 		chemical.setSupplier(supplier);
 		chemicalService.addChemical(chemical);
+		return "chemicallist";
+	}
+	public String toChemicalModify() throws Exception {
+		chemical = chemicalService.getChemicalById(cid);
+		List supplierList = supplierService.getAllSupplier();
+		request.put("supplierList", supplierList);
+		request.put("chemical", chemical);
+		return "chemical_edit";
+	}
+	public String chemicalDetails() throws Exception {
+		chemical = chemicalService.getChemicalById(cid);
+		request.put("chemical", chemical);
+		return "chemicalDetails";
+	}
+	public String doChemicalModify() throws Exception {
+		Supplier supplier = supplierService.getSupplierById(sid);
+		chemical.setSupplier(supplier);
+		chemicalService.updateChemical(chemical);
+		return "chemicallist";
+	}
+	public String deleteChemical() throws Exception {
+		chemical = chemicalService.getChemicalById(cid);
+		chemicalService.deleteChemial(chemical);
 		return "chemicallist";
 	}
 }

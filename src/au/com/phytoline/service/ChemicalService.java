@@ -15,5 +15,11 @@ public interface ChemicalService {
 	
 	public Pager getCountOfChemicalByConditionAndPage(String condition,int pageSize);
 	
+	public Chemical getChemicalById(int id);
+	
 	public void addChemical(Chemical chemical);
+	
+	public void updateChemical(Chemical chemical);
+	
+	public void deleteChemial(Chemical chemical);
 }

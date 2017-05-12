@@ -87,7 +87,7 @@
 				</s:else>
 			</ul>
 		</div>
-	</div></div><s:debug></s:debug>
+	</div></div>
 	<footer>
 		<jsp:include page="../footer.jsp" />
 	</footer>

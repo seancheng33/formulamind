@@ -18,56 +18,32 @@
 		<jsp:include page="../left.jsp" />
 
 		<div class="span9">
-			<h1 class="page-title">Edit Supplier</h1>
+			<h1 class="page-title">Chemical Details</h1>
 			<div class="well">
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane active in" id="home">
 						<div class="btn-toolbar">
-							<a href='toSupplierModify?sid=<s:property value="%{#request.supplier.sid}" />' class="btn btn-primary">Edit</a>
-							<a href="supplierlist" class="btn">Supplier List</a>
+							<a href='toChemicalModify?cid=<s:property value="%{#request.chemical.cid}" />' class="btn btn-primary">Edit</a>
+							<a href="chemicallist" class="btn">Chemical List</a>
 							<div class="btn-group"></div>
 							<hr>
 						</div>
 						<table class="table">
 							<tr>
-								<td>Supplier Id:</td>
-								<td><s:property value="%{#request.supplier.sid}" /></td>
+								<td>Chemical Id:</td>
+								<td><s:property value="%{#request.chemical.cid}" /></td>
+							</tr>
+							<tr>
+								<td>Chemical Name:</td>
+								<td><s:property value="%{#request.chemical.cname}" /></td>
 							</tr>
 							<tr>
 								<td>Supplier Name:</td>
-								<td><s:property value="%{#request.supplier.sname}" /></td>
+								<td><s:property value="%{#request.chemical.supplier.sname}" /></td>
 							</tr>
 							<tr>
-								<td>Address:</td>
-								<td><s:property value="%{#request.supplier.address}" /></td>
-							</tr>
-							<tr>
-								<td>Suburb:</td>
-								<td><s:property value="%{#request.supplier.suburb}" /></td>
-							</tr>
-							<tr>
-								<td>Post code:</td>
-								<td><s:property value="%{#request.supplier.postcode}" /></td>
-							</tr>
-							<tr>
-								<td>Phone:</td>
-								<td><s:property value="%{#request.supplier.phone}" /></td>
-							</tr>
-							<tr>
-								<td>Fax:</td>
-								<td><s:property value="%{#request.supplier.fax}" /></td>
-							</tr>
-							<tr>
-								<td>Contact:</td>
-								<td><s:property value="%{#request.supplier.contact}" /></td>
-							</tr>
-							<tr>
-								<td>Create Date:</td>
-								<td><s:property value="%{#request.supplier.screatedate}" /></td>
-							</tr>
-							<tr>
-								<td>Modify Date:</td>
-								<td><s:property value="%{#request.upplier.smodifydate}" /></td>
+								<td>Price:</td>
+								<td><s:property value="%{#request.chemical.price}" /></td>
 							</tr>
 						</table>
 					</div>

@@ -14,5 +14,11 @@ public interface ChemicalDAO {
 	
 	public Integer getCountOfChemicalByConditionAndPage(String condition);
 	
+	public Chemical getChemicalById(int id);
+	
 	public void addChemial(Chemical chemical);
+	
+	public void updateChemial(Chemical chemical);
+	
+	public void deleteChemial(Chemical chemical);
 }
