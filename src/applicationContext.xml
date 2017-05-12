@@ -84,7 +84,7 @@
 	<bean id="chemicalService" class="au.com.phytoline.service.impl.ChemicalServiceImpl">
 		<property name="chemicalDAO" ref="chemicalDAO" />
 	</bean>
-	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction">
+	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction" scope="prototype">
 		<property name="chemicalService" ref="chemicalService" />
 		<property name="supplierService" ref="supplierService" />
 	</bean>

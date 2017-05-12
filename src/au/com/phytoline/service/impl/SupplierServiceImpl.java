@@ -66,6 +66,11 @@ public class SupplierServiceImpl implements SupplierService {
 		return pager;
 	}
 
+	@Override
+	public List getAllSupplier() {
+		return supplierDAO.getAllSupplier();
+	}
+
 	
 
 }

@@ -22,5 +22,6 @@ public interface SupplierService {
 	public List getSupplierByConditionAndPage(String conditon,int page,int pageSize);
 	//按搜索条件,获取所有supplier的数量
 	public Pager getCountOfSupplierByConditionAndPage(String condition, int pageSize);
-	
+	//
+	public List getAllSupplier();
 }

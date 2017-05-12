@@ -23,4 +23,5 @@ public interface SupplierDAO {
 	public List getSupplierByConditionAndPage(String condition,int page,int pageSize);
 	//按搜索条件,获取所有supplier的数量
 	public Integer getCountOfSupplierByConditionAndPage(String condition);
+	
 }

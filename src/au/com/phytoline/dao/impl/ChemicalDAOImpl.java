@@ -22,6 +22,7 @@ public class ChemicalDAOImpl implements ChemicalDAO {
 	@Override
 	public List getAllChemicalByPage(int page, int pageSize) {
 		Session session = sessionFactory.getCurrentSession();
+		
 		Criteria c = session.createCriteria(Chemical.class);
 		c.setFirstResult(pageSize * (page - 1));
 		c.setMaxResults(pageSize);
@@ -63,7 +64,7 @@ public class ChemicalDAOImpl implements ChemicalDAO {
 	@Override
 	public void addChemial(Chemical chemical) {
 		Session session =sessionFactory.getCurrentSession();
-		session.saveOrUpdate(chemical);
+		session.save(chemical);
 	}
 
 }
