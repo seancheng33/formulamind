@@ -56,4 +56,10 @@
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
 		</action>
 	</package>
+
+	<package name="product" extends="formulamind" namespace="/">
+		<action name="productlist" class="productAction" method="productList">
+			<result name="productlist">production/index.jsp</result>
+		</action>
+	</package>
 </struts>    

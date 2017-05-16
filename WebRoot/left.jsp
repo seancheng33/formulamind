@@ -8,7 +8,7 @@
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="Batch.jsp">Make A New Batch</a></li>
 			<li><a href="PreviousBatch.jsp">View Previons Batch Details</a></li>
-			<li><a href="Product.jsp">Product Manager</a></li>
+			<li><a href="productlist">Product Manager</a></li>
 			<li><a href="chemicallist">Ingredint Manager</a></li>
 			<li><a href="supplierlist">Set Up Suppliers</a></li>
 			<li><a href="help.html">Search Previons</a></li>

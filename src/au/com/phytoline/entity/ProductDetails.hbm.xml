@@ -10,23 +10,14 @@
             <column name="pdid" />
             <generator class="native"></generator>
         </id>
-        <property name="pname" type="java.lang.String">
-            <column name="pname" />
-        </property>
-        <property name="pcode" type="java.lang.String">
-            <column name="pcode" />
-        </property>
+        <many-to-one name="chemical" class="au.com.phytoline.entity.Chemical" fetch="select" lazy="false">
+            <column name="chem_id" />
+        </many-to-one>
+        <many-to-one name="product" class="au.com.phytoline.entity.Product" fetch="select" lazy="false">
+            <column name="pid" />
+        </many-to-one>
         <property name="position" type="java.lang.Integer">
             <column name="position" />
-        </property>
-        <property name="chemId" type="java.lang.Integer">
-            <column name="chem_id" />
-        </property>
-        <property name="chemical" type="java.lang.String">
-            <column name="chemical" />
-        </property>
-        <property name="price" type="java.lang.Long">
-            <column name="price" precision="10" scale="0" />
         </property>
         <property name="percent" type="java.lang.Double">
             <column name="percent" precision="255" scale="0" />

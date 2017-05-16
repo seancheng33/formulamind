@@ -5,17 +5,13 @@ package au.com.phytoline.entity;
  */
 
 public class ProductDetails implements java.io.Serializable {
-	private static final long serialVersionUID = -905320498031572183L;
-	
+
 	// Fields
 
 	private Integer pdid;
-	private String pname;
-	private String pcode;
+	private Chemical chemical;
+	private Product product;
 	private Integer position;
-	private Integer chemId;
-	private String chemical;
-	private Long price;
 	private Double percent;
 	private Double amount;
 
@@ -26,15 +22,11 @@ public class ProductDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProductDetails(String pname, String pcode, Integer position,
-			Integer chemId, String chemical, Long price, Double percent,
-			Double amount) {
-		this.pname = pname;
-		this.pcode = pcode;
-		this.position = position;
-		this.chemId = chemId;
+	public ProductDetails(Chemical chemical, Product product, Integer position,
+			Double percent, Double amount) {
 		this.chemical = chemical;
-		this.price = price;
+		this.product = product;
+		this.position = position;
 		this.percent = percent;
 		this.amount = amount;
 	}
@@ -49,20 +41,20 @@ public class ProductDetails implements java.io.Serializable {
 		this.pdid = pdid;
 	}
 
-	public String getPname() {
-		return this.pname;
+	public Chemical getChemical() {
+		return this.chemical;
 	}
 
-	public void setPname(String pname) {
-		this.pname = pname;
+	public void setChemical(Chemical chemical) {
+		this.chemical = chemical;
 	}
 
-	public String getPcode() {
-		return this.pcode;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setPcode(String pcode) {
-		this.pcode = pcode;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Integer getPosition() {
@@ -71,30 +63,6 @@ public class ProductDetails implements java.io.Serializable {
 
 	public void setPosition(Integer position) {
 		this.position = position;
-	}
-
-	public Integer getChemId() {
-		return this.chemId;
-	}
-
-	public void setChemId(Integer chemId) {
-		this.chemId = chemId;
-	}
-
-	public String getChemical() {
-		return this.chemical;
-	}
-
-	public void setChemical(String chemical) {
-		this.chemical = chemical;
-	}
-
-	public Long getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(Long price) {
-		this.price = price;
 	}
 
 	public Double getPercent() {

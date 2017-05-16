@@ -92,6 +92,15 @@
 	
 	
 	<!-- production -->
+	<bean id="productDAO" class="au.com.phytoline.dao.impl.ProductDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="productService" class="au.com.phytoline.service.impl.ProductServiceImpl">
+		<property name="productDAO" ref="productDAO" />
+	</bean>
+	<bean id="productAction" class="au.com.phytoline.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService" />
+	</bean>
 	
 	<!-- batch -->
 	

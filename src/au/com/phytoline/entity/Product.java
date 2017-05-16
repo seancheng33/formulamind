@@ -1,13 +1,15 @@
 package au.com.phytoline.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Product entity. @author MyEclipse Persistence Tools
  */
 
 public class Product implements java.io.Serializable {
-	private static final long serialVersionUID = 3275517595917557153L;
+
 	// Fields
 
 	private Integer pid;
@@ -15,6 +17,7 @@ public class Product implements java.io.Serializable {
 	private String pcode;
 	private Date pdate;
 	private String pinfo;
+	private Set productDetailses = new HashSet(0);
 
 	// Constructors
 
@@ -23,11 +26,13 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(String pname, String pcode, Date pdate, String pinfo) {
+	public Product(String pname, String pcode, Date pdate, String pinfo,
+			Set productDetailses) {
 		this.pname = pname;
 		this.pcode = pcode;
 		this.pdate = pdate;
 		this.pinfo = pinfo;
+		this.productDetailses = productDetailses;
 	}
 
 	// Property accessors
@@ -70,6 +75,14 @@ public class Product implements java.io.Serializable {
 
 	public void setPinfo(String pinfo) {
 		this.pinfo = pinfo;
+	}
+
+	public Set getProductDetailses() {
+		return this.productDetailses;
+	}
+
+	public void setProductDetailses(Set productDetailses) {
+		this.productDetailses = productDetailses;
 	}
 
 }

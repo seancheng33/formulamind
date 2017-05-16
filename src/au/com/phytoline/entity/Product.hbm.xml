@@ -22,5 +22,11 @@
         <property name="pinfo" type="java.lang.String">
             <column name="pinfo" />
         </property>
+        <set name="productDetailses" inverse="true" lazy="false">
+            <key>
+                <column name="pid" />
+            </key>
+            <one-to-many class="au.com.phytoline.entity.ProductDetails" />
+        </set>
     </class>
 </hibernate-mapping>

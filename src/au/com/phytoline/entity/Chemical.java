@@ -1,5 +1,8 @@
 package au.com.phytoline.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Chemical entity. @author MyEclipse Persistence Tools
  */
@@ -12,6 +15,7 @@ public class Chemical implements java.io.Serializable {
 	private Supplier supplier;
 	private String cname;
 	private Double price;
+	private Set productDetailses = new HashSet(0);
 
 	// Constructors
 
@@ -20,10 +24,12 @@ public class Chemical implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Chemical(Supplier supplier, String cname, Double price) {
+	public Chemical(Supplier supplier, String cname, Double price,
+			Set productDetailses) {
 		this.supplier = supplier;
 		this.cname = cname;
 		this.price = price;
+		this.productDetailses = productDetailses;
 	}
 
 	// Property accessors
@@ -58,6 +64,14 @@ public class Chemical implements java.io.Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Set getProductDetailses() {
+		return this.productDetailses;
+	}
+
+	public void setProductDetailses(Set productDetailses) {
+		this.productDetailses = productDetailses;
 	}
 
 }
