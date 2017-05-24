@@ -20,10 +20,16 @@
             <column name="position" />
         </property>
         <property name="percent" type="java.lang.Double">
-            <column name="percent" precision="255" scale="0" />
+            <column name="percent" precision="22" scale="0" />
         </property>
         <property name="amount" type="java.lang.Double">
-            <column name="amount" precision="255" scale="0" />
+            <column name="amount" precision="22" scale="0" />
         </property>
+        <set name="batchDetailses" inverse="true" lazy="false">
+            <key>
+                <column name="pdid" />
+            </key>
+            <one-to-many class="au.com.phytoline.entity.BatchDetails" />
+        </set>
     </class>
 </hibernate-mapping>

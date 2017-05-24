@@ -61,5 +61,30 @@
 		<action name="productlist" class="productAction" method="productList">
 			<result name="productlist">production/index.jsp</result>
 		</action>
+		<action name="productDetails" class="productAction" method="productDetails">
+			<result name="productDetails">production/details.jsp</result>
+		</action>
+		<action name="addProduct" class="productAction" method="addProduct">
+			<result name="productlist" type="redirectAction">productlist</result>
+		</action>
+		<action name="toAddProduct" class="productAction" method="toAddProduct">
+			<result name="addProduct">production/add.jsp</result>
+		</action>
+	</package>
+
+	<package name="batch" extends="formulamind" namespace="/">
+		<action name="toAddBatch" class="batchAction" method="toAddBatch">
+			<result name="newbatch">batch/add.jsp</result>
+		</action>
+		<action name="doAddBatch" class="batchAction" method="doAddBatch">
+			<result name="batchadd" type="redirectAction">toAddBatch</result>
+		</action>
+		<action name="previewBatch" class="batchAction" method="previewBatch">
+			<result name="previewBatch">batch/previewbacth.jsp</result>
+		</action>
+		<action name="previonsBatchDetails" class="batchAction"
+			method="previonsBatchDetails">
+			<result name="previonsBatchDetails">batch/viewBatch.jsp</result>
+		</action>
 	</package>
 </struts>    

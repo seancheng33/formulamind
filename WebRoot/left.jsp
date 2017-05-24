@@ -6,8 +6,8 @@
 		</div>
 		<ul id="dashboard-menu" class="nav nav-list collapse in">
 			<li><a href="index.jsp">Home</a></li>
-			<li><a href="Batch.jsp">Make A New Batch</a></li>
-			<li><a href="PreviousBatch.jsp">View Previons Batch Details</a></li>
+			<li><a href="toAddBatch">Make A New Batch</a></li>
+			<li><a href="previonsBatchDetails">View Previons Batch Details</a></li>
 			<li><a href="productlist">Product Manager</a></li>
 			<li><a href="chemicallist">Ingredint Manager</a></li>
 			<li><a href="supplierlist">Set Up Suppliers</a></li>

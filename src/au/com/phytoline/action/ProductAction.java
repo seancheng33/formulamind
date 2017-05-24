@@ -8,6 +8,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import au.com.phytoline.entity.Pager;
 import au.com.phytoline.entity.Product;
+import au.com.phytoline.entity.ProductDetails;
+import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,6 +18,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		SessionAware {
 	private static final long serialVersionUID = -2208805501107669256L;
 	ProductService productService;
+	ProductDetailsService productDetailsService;
 	Pager pager;
 	Product product;
 	public Product getProduct() {
@@ -41,6 +44,18 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
+	public void setProductDetailsService(
+			ProductDetailsService productDetailsService) {
+		this.productDetailsService = productDetailsService;
+	}
+	int pid;
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	public int getPid() {
+		return pid;
+	}
+	
 	Map<String, Object> session;
 	@Override
 	public void setSession(Map<String, Object> session) {
@@ -68,4 +83,18 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		return "productlist";
 	}
 	
+	public String productDetails(){
+		Product product=productService.findProductById(pid);
+		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		request.put("product", product);
+		request.put("productDetailses", productDetailses);
+		return "productDetails";
+	}
+	
+	public String toAddProduct(){
+		return "addProduct";
+	}
+	public String addProduct(){
+		return "productlist";
+	}
 }

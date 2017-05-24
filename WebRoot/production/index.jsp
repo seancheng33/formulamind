@@ -29,7 +29,7 @@
 			</form>
 		</div>
 		<div class="btn-toolbar">
-			<a href="toaddSupplier" class="btn btn-primary"><i
+			<a href="toAddProduct" class="btn btn-primary"><i
 				class="icon-plus"></i> New Product</a> <a href="productlist"
 				class="btn">Show All Product</a>
 			<button class="btn">Import</button>
@@ -57,7 +57,7 @@
 							<td>${product.pcode}</td>
 							<td>${product.pdate}</td>
 							<td>${product.pinfo}</td>
-							<td><a href="supplierDetails?pid=${product.pid}" title="Show detail"><i class="icon-file"></i>
+							<td><a href="productDetails?pid=${product.pid}" title="Show detail"><i class="icon-file"></i>
 							</a> <a href="toSupplierModify?pid=${product.pid}" title="Edit"><i
 									class="icon-pencil"></i> </a> <a
 								href="deleteSupplier?pid=${product.pid}" data-toggle="modal"

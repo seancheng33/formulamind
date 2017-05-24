@@ -22,6 +22,12 @@
         <property name="pinfo" type="java.lang.String">
             <column name="pinfo" />
         </property>
+        <set name="batchs" inverse="true" lazy="false">
+            <key>
+                <column name="pid" />
+            </key>
+            <one-to-many class="au.com.phytoline.entity.Batch" />
+        </set>
         <set name="productDetailses" inverse="true" lazy="false">
             <key>
                 <column name="pid" />

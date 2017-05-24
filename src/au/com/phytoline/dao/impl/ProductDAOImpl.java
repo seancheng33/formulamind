@@ -35,4 +35,18 @@ public class ProductDAOImpl implements ProductDAO {
 		return c.list().size();
 	}
 
+	@Override
+	public Product findProductById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Product product=(Product) session.get(Product.class, id);
+		return product;
+	}
+
+	@Override
+	public List getAllProduct() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Product.class);
+		return c.list();
+	}
+
 }

@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
+<sx:head />
 <title>Add Chemical</title>
 <link rel="stylesheet" type="text/css"
 	href="lib/bootstrap/css/bootstrap.css">
@@ -31,8 +33,7 @@
 					<hr>
 				</div>
 						<s:textfield label="Chemical Name" name="chemical.cname" />
-						<s:select label="Supplier Name" list="#request.supplierList" name="sid"
-						listKey="sid" listValue="sname" ></s:select>
+						<s:select label="Supplier Name" list="#request.supplierList" name="sid" listKey="sid" listValue="sname" />
 						<s:textfield label="Price" name="chemical.price" />
 					</s:form>
 				</div>

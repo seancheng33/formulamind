@@ -9,15 +9,12 @@
         <id name="bid" type="java.lang.Integer">
             <column name="bid" />
             <generator class="native"></generator>
-        </id>
+        </id> 
+        <many-to-one name="product" class="au.com.phytoline.entity.Product" fetch="select" lazy="false">
+            <column name="pid" />
+        </many-to-one>
         <property name="batchSerials" type="java.lang.String">
             <column name="batch_serials" length="10" />
-        </property>
-        <property name="productCode" type="java.lang.String">
-            <column name="`product-code`" length="10" />
-        </property>
-        <property name="productName" type="java.lang.String">
-            <column name="product_name" length="50" />
         </property>
         <property name="batchCode" type="java.lang.String">
             <column name="batch_code" length="10" />
@@ -34,5 +31,11 @@
         <property name="binfo" type="java.lang.String">
             <column name="binfo" />
         </property>
+        <set name="batchDetailses" inverse="true" lazy="false">
+            <key>
+                <column name="bid" />
+            </key>
+            <one-to-many class="au.com.phytoline.entity.BatchDetails" />
+        </set>
     </class>
 </hibernate-mapping>

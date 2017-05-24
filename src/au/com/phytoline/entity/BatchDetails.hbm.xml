@@ -10,14 +10,14 @@
             <column name="bdid" />
             <generator class="native"></generator>
         </id>
-        <property name="bserials" type="java.lang.String">
-            <column name="bserials" length="10" />
-        </property>
-        <property name="pname" type="java.lang.String">
-            <column name="pname" length="50" />
-        </property>
-        <property name="batch" type="java.lang.String">
-            <column name="batch" length="10" />
+        <many-to-one name="batch" class="au.com.phytoline.entity.Batch" fetch="select" lazy="false">
+            <column name="bid" />
+        </many-to-one>
+        <many-to-one name="productDetails" class="au.com.phytoline.entity.ProductDetails" fetch="select" lazy="false">
+            <column name="pdid" />
+        </many-to-one>
+        <property name="chemName" type="java.lang.String">
+            <column name="chem_name" length="50" />
         </property>
         <property name="quantity" type="java.lang.Double">
             <column name="quantity" precision="22" scale="0" />

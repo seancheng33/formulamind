@@ -4,6 +4,7 @@ import java.util.List;
 
 import au.com.phytoline.dao.ProductDAO;
 import au.com.phytoline.entity.Pager;
+import au.com.phytoline.entity.Product;
 import au.com.phytoline.service.ProductService;
 
 public class ProductServiceImpl implements ProductService {
@@ -25,6 +26,16 @@ public class ProductServiceImpl implements ProductService {
 		pager.setPerPageRows(pageSize);
 		pager.setRowCount(count);
 		return pager;
+	}
+
+	@Override
+	public Product findProductById(int id) {
+		return productDAO.findProductById(id);
+	}
+
+	@Override
+	public List getAllProduct() {
+		return productDAO.getAllProduct();
 	}
 
 }

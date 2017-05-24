@@ -1,24 +1,26 @@
 package au.com.phytoline.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Batch entity. @author MyEclipse Persistence Tools
  */
 
 public class Batch implements java.io.Serializable {
-	private static final long serialVersionUID = 5847725769209015842L;
+
 	// Fields
 
 	private Integer bid;
+	private Product product;
 	private String batchSerials;
-	private String productCode;
-	private String productName;
 	private String batchCode;
 	private Double batchQuantity;
 	private String operatorName;
 	private Date batchDate;
 	private String binfo;
+	private Set batchDetailses = new HashSet(0);
 
 	// Constructors
 
@@ -27,17 +29,17 @@ public class Batch implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Batch(String batchSerials, String productCode, String productName,
-			String batchCode, Double batchQuantity, String operatorName,
-			Date batchDate, String binfo) {
+	public Batch(Product product, String batchSerials, String batchCode,
+			Double batchQuantity, String operatorName, Date batchDate,
+			String binfo, Set batchDetailses) {
+		this.product = product;
 		this.batchSerials = batchSerials;
-		this.productCode = productCode;
-		this.productName = productName;
 		this.batchCode = batchCode;
 		this.batchQuantity = batchQuantity;
 		this.operatorName = operatorName;
 		this.batchDate = batchDate;
 		this.binfo = binfo;
+		this.batchDetailses = batchDetailses;
 	}
 
 	// Property accessors
@@ -50,28 +52,20 @@ public class Batch implements java.io.Serializable {
 		this.bid = bid;
 	}
 
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	public String getBatchSerials() {
 		return this.batchSerials;
 	}
 
 	public void setBatchSerials(String batchSerials) {
 		this.batchSerials = batchSerials;
-	}
-
-	public String getProductCode() {
-		return this.productCode;
-	}
-
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
-
-	public String getProductName() {
-		return this.productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 
 	public String getBatchCode() {
@@ -112,6 +106,14 @@ public class Batch implements java.io.Serializable {
 
 	public void setBinfo(String binfo) {
 		this.binfo = binfo;
+	}
+
+	public Set getBatchDetailses() {
+		return this.batchDetailses;
+	}
+
+	public void setBatchDetailses(Set batchDetailses) {
+		this.batchDetailses = batchDetailses;
 	}
 
 }

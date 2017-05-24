@@ -6,13 +6,12 @@ package au.com.phytoline.entity;
 
 public class BatchDetails implements java.io.Serializable {
 
-	private static final long serialVersionUID = -2614479252914940989L;
 	// Fields
 
 	private Integer bdid;
-	private String bserials;
-	private String pname;
-	private String batch;
+	private Batch batch;
+	private ProductDetails productDetails;
+	private String chemName;
 	private Double quantity;
 	private Double qtyRequired;
 
@@ -23,11 +22,11 @@ public class BatchDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BatchDetails(String bserials, String pname, String batch,
-			Double quantity, Double qtyRequired) {
-		this.bserials = bserials;
-		this.pname = pname;
+	public BatchDetails(Batch batch, ProductDetails productDetails,
+			String chemName, Double quantity, Double qtyRequired) {
 		this.batch = batch;
+		this.productDetails = productDetails;
+		this.chemName = chemName;
 		this.quantity = quantity;
 		this.qtyRequired = qtyRequired;
 	}
@@ -42,28 +41,28 @@ public class BatchDetails implements java.io.Serializable {
 		this.bdid = bdid;
 	}
 
-	public String getBserials() {
-		return this.bserials;
-	}
-
-	public void setBserials(String bserials) {
-		this.bserials = bserials;
-	}
-
-	public String getPname() {
-		return this.pname;
-	}
-
-	public void setPname(String pname) {
-		this.pname = pname;
-	}
-
-	public String getBatch() {
+	public Batch getBatch() {
 		return this.batch;
 	}
 
-	public void setBatch(String batch) {
+	public void setBatch(Batch batch) {
 		this.batch = batch;
+	}
+
+	public ProductDetails getProductDetails() {
+		return this.productDetails;
+	}
+
+	public void setProductDetails(ProductDetails productDetails) {
+		this.productDetails = productDetails;
+	}
+
+	public String getChemName() {
+		return this.chemName;
+	}
+
+	public void setChemName(String chemName) {
+		this.chemName = chemName;
 	}
 
 	public Double getQuantity() {

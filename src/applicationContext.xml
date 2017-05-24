@@ -6,7 +6,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/formula_mind">
@@ -84,27 +83,53 @@
 	<bean id="chemicalService" class="au.com.phytoline.service.impl.ChemicalServiceImpl">
 		<property name="chemicalDAO" ref="chemicalDAO" />
 	</bean>
-	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction" scope="prototype">
-	<!-- scope="prototype" 每一次请求都是产生一个新的实例，如果不加，会导致页面还在使用之前的数据等一系列数据显示混乱的问题 -->
+	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction"
+		scope="prototype">
+		<!-- scope="prototype" 每一次请求都是产生一个新的实例，如果不加，会导致页面还在使用之前的数据等一系列数据显示混乱的问题 -->
 		<property name="chemicalService" ref="chemicalService" />
 		<property name="supplierService" ref="supplierService" />
 	</bean>
-	
-	
+
+
 	<!-- production -->
 	<bean id="productDAO" class="au.com.phytoline.dao.impl.ProductDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="productDetailsDAO" class="au.com.phytoline.dao.impl.ProductDetailsDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="productService" class="au.com.phytoline.service.impl.ProductServiceImpl">
 		<property name="productDAO" ref="productDAO" />
 	</bean>
-	<bean id="productAction" class="au.com.phytoline.action.ProductAction" scope="prototype">
-		<property name="productService" ref="productService" />
+	<bean id="productDetailsService" class="au.com.phytoline.service.impl.ProductDetailsServiceImpl">
+		<property name="productDetailsDAO" ref="productDetailsDAO" />
 	</bean>
-	
+	<bean id="productAction" class="au.com.phytoline.action.ProductAction"
+		scope="prototype">
+		<property name="productService" ref="productService" />
+		<property name="productDetailsService" ref="productDetailsService" />
+	</bean>
+
 	<!-- batch -->
-	
+	<bean id="batchDAO" class="au.com.phytoline.dao.impl.BatchDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="batchDetailsDAO" class="au.com.phytoline.dao.impl.BatchDetailsDAOIMpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="batchService" class="au.com.phytoline.service.impl.BatchServiceImpl">
+		<property name="batchDAO" ref="batchDAO" />
+	</bean>
+	<bean id="batchDetailsService" class="au.com.phytoline.service.impl.BatchDetailsServiceImpl">
+		<property name="batchDetailsDAO" ref="batchDetailsDAO" />
+	</bean>
+	<bean id="batchAction" class="au.com.phytoline.action.BatchAction" scope="prototype">
+		<property name="batchService" ref="batchService" />
+		<property name="productService" ref="productService" />
+		<property name="productDetailsService" ref="productDetailsService" />
+		<property name="batchDetailsService" ref="batchDetailsService"></property>
+	</bean>
 	<!-- -->
-	
+
 	<!-- -->
 </beans> 
