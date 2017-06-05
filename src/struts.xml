@@ -55,6 +55,11 @@
 		<action name="deleteChemical" class="chemicalAction" method="deleteChemical">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
 		</action>
+<!-- 		<action name="ajaxChemicalList" class="chemicalAction" method="ajaxChemicalList"> -->
+<!-- 			<result type="json" name="ajaxlist"> -->
+<!-- 			<param name="root">result</param> -->
+<!-- 			</result> -->
+<!-- 		</action> -->
 	</package>
 
 	<package name="product" extends="formulamind" namespace="/">

@@ -1,7 +1,10 @@
 package au.com.phytoline.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -24,6 +27,15 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	SupplierService supplierService;
 	String nameSearch;
 	int sid;
+	String result;
+	
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 
 	public int getSid() {
 		return sid;
@@ -154,4 +166,23 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		chemicalService.deleteChemial(chemical);
 		return "chemicallist";
 	}
+	
+	public String ajaxChemicalList(){
+		int curPage = 1;
+		if (pager != null) {
+			curPage = pager.getCurPage();
+		}
+		List chemicalList = null;
+			// 无查询条件，获取supplier的列表
+			chemicalList = chemicalService.getAllChemicalByPage(curPage, 10);
+			pager = chemicalService.getCountOfChemical(10);
+		
+		pager.setCurPage(curPage);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("chemicalList", chemicalList);			
+		JSONObject json = JSONObject.fromObject(map);//将map对象转换成json类型数据
+		result = json.toString();//给result赋值，传递给页面
+		return "ajaxlist";
+	}
+	
 }
