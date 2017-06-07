@@ -3,6 +3,7 @@ package au.com.phytoline.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -39,6 +40,20 @@ public class BatchDAOImpl implements BatchDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c=session.createCriteria(Batch.class);
 		return c.list().size();
+	}
+
+	@Override
+	public Integer getLastBatchSerials() {
+		Integer count=null;
+		try{
+		Session session=sessionFactory.getCurrentSession();
+		String hql="select max(batchSerials) from Batch";
+		Query query=session.createQuery(hql);
+		count= Integer.parseInt(query.uniqueResult().toString()) ;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }

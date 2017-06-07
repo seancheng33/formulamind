@@ -13,6 +13,18 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
 <script src="lib/jquery.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+function saveBatch(){
+    document.newbatch.action="doAddBatch";
+    document.newbatch.submit();
+}
+
+function previewBatch(){
+    document.newbatch.action="previewBatch";
+    document.newbatch.submit();
+}
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -24,21 +36,23 @@
 		<div class="well">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane active in" id="home">
-					<s:form action="/doAddBatch" method="post">
+					<s:form name="newbatch" action="/doAddBatch" method="post">
 									<div class="btn-toolbar">
-					<button type="submit" class="btn btn-primary"> <i class="icon-save"></i>
+					<button type="submit" class="btn btn-primary" onclick="saveBatch()"> <i class="icon-save"></i>
 						Save
-					</button> <a href="previewBatch" class="btn">Print preview</a>
-					<a href="#" class="btn">Cancel</a>
+					</button> <button type="submit" class="btn" onclick="previewBatch()"><i
+				class="icon-print"></i>Print preview</button>
+					<button type="reset" class="btn">Cancel</button>
 					<div class="btn-group"></div>
 					<hr>
 				</div>
+						<label>Serial No:</label><s:property  value="#request.serials"/>
+						<s:hidden name="batch.batchSerials" value="%{#request.serials}" />
 						<s:select label="Product Name" name="pid" list="#request.productList" listKey="pid" listValue="pname" />
-						<s:textfield label="Serial No" name="batch.batchSerials" />
 						<s:textfield label="Batch No" name="batch.batchCode" />
 						<s:textfield label="Total Quantity" name="batch.batchQuantity" />
 						<s:textfield label="Operator" name="batch.operatorName" />
-						<sx:datetimepicker label="Batch Date" name="batch.batchDate" displayFormat="yyyy-MM-dd" />
+						<sx:datetimepicker label="Batch Date" name="batch.batchDate" displayFormat="yyyy-MM-dd" value="%{'today'}"/>
 						<s:textarea label="Other Information" name="batch.binfo" />
 					</s:form>
 				</div>

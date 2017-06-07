@@ -11,7 +11,13 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
 
-<script src="lib/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.min.js" type="text/javascript"></script>
+<script src="lib/jquery.print.min.js" type="text/javascript" ></script>
+<script type="text/javascript"> 
+function printit(){ 
+  $("#batchPrint").print({iframe:true,prepend:'<br/>'}); 
+} 
+</script> 
 </head>
 
 <body>
@@ -21,32 +27,32 @@
 	<div class="span9">
 		<h1 class="page-title">Production Batch Sheet</h1>
 		<div class="btn-toolbar">
-			<a href="#" class="btn btn-primary"><i
-				class="icon-print"></i> Print</a> <a href="#"
-				class="btn"><i
+			<button class="btn btn-primary"><i
+				class="icon-print" onclick="printit()"></i> Print</button> <a href="#"
+				class="btn" onclick="javascript:history.back(-1);"><i
 				class="icon-circle-arrow-left"></i>Back</a>
 			<div class="btn-group"></div>
 		</div>
-		<div class="well">
-<table width="100%">
+		<div class="well" id="batchPrint">
+<table width="100%" >
   <tr align="center">
     <td colspan="2"><h1>Production Batch Sheet</h1></td>
   </tr>
   <tr>
     <td width="70%"></td>
-    <td><label>Serial No:</label><s:property value="#request.batch.batchSerials"/></td>
+    <td>Serial No:<s:property value="#request.batch.batchSerials"/></td>
   </tr>
   <tr>
     <td></td>
-    <td><label>Batch No:</label><s:property value="#request.batch.batchCode"/></td>
+    <td>Batch No:<s:property value="#request.batch.batchCode"/></td>
   </tr>
   <tr>
-    <td><label>Product Name:</label><s:property value="#request.batch.product.pname"/></td>
-    <td><label>Batch Date:</label><s:property value="#request.batch.batchDate"/></td>
+    <td>Product Name:<s:property value="#request.batch.product.pname"/></td>
+    <td>Batch Date:<s:property value="#request.batch.batchDate" /></td>
   </tr>
   <tr>
-    <td><label>Operator:</label><s:property value="#request.batch.operatorName"/></td>
-    <td><label>Total Quantity:</label><s:property value="#request.batch.batchQuantity"/></td>
+    <td>Operator:<s:property value="#request.batch.operatorName"/></td>
+    <td>Total Quantity:<s:property value="#request.batch.batchQuantity"/></td>
   </tr>
   <tr>
     <td colspan="2"><hr></td>
@@ -60,9 +66,9 @@
     <th width="15%">Quantity<br>Added(Kg)</th>
     <th width="15%">Added "&radic;"</th>
   </tr>
-  <s:iterator id="chemical" value="#request.chemicalList">
+  <s:iterator id="chemical" value="#request.chemList">
   <tr>
-  <td>${chemical.cname}</td>
+  <td>${chemical.chemName}</td>
   <td></td>
   <td></td>
   <td></td>
@@ -72,7 +78,7 @@
     </td>
   </tr>
     <tr>
-    <td colspan="2">Other Information:</td>
+    <td colspan="2">Other Information:<br><s:property value="#request.batch.binfo"/></td>
   </tr>
       <tr>
     <td colspan="2"></td>

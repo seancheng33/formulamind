@@ -9,4 +9,5 @@ public interface BatchService {
 	public void addBatch(Batch batch);
 	public List getAllBatchByPager(int page,int pageSize);
 	public Pager getCountOfBatch(int pageSize);
+	public Integer getLastBatchSerials();
 }

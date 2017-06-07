@@ -1,8 +1,5 @@
 package au.com.phytoline.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * ProductDetails entity. @author MyEclipse Persistence Tools
  */
@@ -12,12 +9,13 @@ public class ProductDetails implements java.io.Serializable {
 	// Fields
 
 	private Integer pdid;
-	private Chemical chemical;
 	private Product product;
+	private String pcode;
 	private Integer position;
+	private String chemName;
+	private Double chemPrice;
 	private Double percent;
 	private Double amount;
-	private Set batchDetailses = new HashSet(0);
 
 	// Constructors
 
@@ -26,14 +24,15 @@ public class ProductDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProductDetails(Chemical chemical, Product product, Integer position,
-			Double percent, Double amount, Set batchDetailses) {
-		this.chemical = chemical;
+	public ProductDetails(Product product, String pcode, Integer position,
+			String chemName, Double chemPrice, Double percent, Double amount) {
 		this.product = product;
+		this.pcode = pcode;
 		this.position = position;
+		this.chemName = chemName;
+		this.chemPrice = chemPrice;
 		this.percent = percent;
 		this.amount = amount;
-		this.batchDetailses = batchDetailses;
 	}
 
 	// Property accessors
@@ -46,14 +45,6 @@ public class ProductDetails implements java.io.Serializable {
 		this.pdid = pdid;
 	}
 
-	public Chemical getChemical() {
-		return this.chemical;
-	}
-
-	public void setChemical(Chemical chemical) {
-		this.chemical = chemical;
-	}
-
 	public Product getProduct() {
 		return this.product;
 	}
@@ -62,12 +53,36 @@ public class ProductDetails implements java.io.Serializable {
 		this.product = product;
 	}
 
+	public String getPcode() {
+		return this.pcode;
+	}
+
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
+	}
+
 	public Integer getPosition() {
 		return this.position;
 	}
 
 	public void setPosition(Integer position) {
 		this.position = position;
+	}
+
+	public String getChemName() {
+		return this.chemName;
+	}
+
+	public void setChemName(String chemName) {
+		this.chemName = chemName;
+	}
+
+	public Double getChemPrice() {
+		return this.chemPrice;
+	}
+
+	public void setChemPrice(Double chemPrice) {
+		this.chemPrice = chemPrice;
 	}
 
 	public Double getPercent() {
@@ -84,14 +99,6 @@ public class ProductDetails implements java.io.Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public Set getBatchDetailses() {
-		return this.batchDetailses;
-	}
-
-	public void setBatchDetailses(Set batchDetailses) {
-		this.batchDetailses = batchDetailses;
 	}
 
 }

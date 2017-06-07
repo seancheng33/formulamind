@@ -33,4 +33,10 @@ public class BatchServiceImpl implements BatchService {
 		return pager;
 	}
 
+	@Override
+	public Integer getLastBatchSerials() {
+		int count =batchDAO.getLastBatchSerials();
+		return count;
+	}
+
 }

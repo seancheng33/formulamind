@@ -9,8 +9,9 @@ public class BatchDetails implements java.io.Serializable {
 	// Fields
 
 	private Integer bdid;
-	private Batch batch;
-	private ProductDetails productDetails;
+	private Integer bserials;
+	private Integer pname;
+	private String bcode;
 	private String chemName;
 	private Double quantity;
 	private Double qtyRequired;
@@ -22,10 +23,11 @@ public class BatchDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BatchDetails(Batch batch, ProductDetails productDetails,
+	public BatchDetails(Integer bserials, Integer pname, String bcode,
 			String chemName, Double quantity, Double qtyRequired) {
-		this.batch = batch;
-		this.productDetails = productDetails;
+		this.bserials = bserials;
+		this.pname = pname;
+		this.bcode = bcode;
 		this.chemName = chemName;
 		this.quantity = quantity;
 		this.qtyRequired = qtyRequired;
@@ -41,20 +43,28 @@ public class BatchDetails implements java.io.Serializable {
 		this.bdid = bdid;
 	}
 
-	public Batch getBatch() {
-		return this.batch;
+	public Integer getBserials() {
+		return this.bserials;
 	}
 
-	public void setBatch(Batch batch) {
-		this.batch = batch;
+	public void setBserials(Integer bserials) {
+		this.bserials = bserials;
 	}
 
-	public ProductDetails getProductDetails() {
-		return this.productDetails;
+	public Integer getPname() {
+		return this.pname;
 	}
 
-	public void setProductDetails(ProductDetails productDetails) {
-		this.productDetails = productDetails;
+	public void setPname(Integer pname) {
+		this.pname = pname;
+	}
+
+	public String getBcode() {
+		return this.bcode;
+	}
+
+	public void setBcode(String bcode) {
+		this.bcode = bcode;
 	}
 
 	public String getChemName() {

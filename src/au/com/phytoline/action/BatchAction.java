@@ -74,15 +74,14 @@ public class BatchAction extends ActionSupport implements RequestAware,
 
 	public String toAddBatch(){
 		List productList = productService.getAllProduct();
+		int serials =batchService.getLastBatchSerials()+1;
+		System.out.println(serials);
 		request.put("productList",productList);
+		request.put("serials",serials);
 		return "newbatch";
 	}
 	public String doAddBatch(){
 		Product product=productService.findProductById(pid);
-//		if(batch.getBatchDate().equals(null)||batch.getBatchDate()==null){
-//			batch.setBatchDate(new Date());
-//			System.out.println(new Date());
-//		}
 		batch.setProduct(product);
 		batchService.addBatch(batch);
 		
@@ -95,9 +94,11 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String previewBatch(){
-		batch = (Batch) session.get(batch);
-		System.out.println(batch);
-		request.put("batch", batch);
+		Product product=productService.findProductById(pid);
+		batch.setProduct(product);
+		List chemList = productDetailsService.getDetailsByProductId(pid);
+		request.put("chemList", chemList);
+		//System.out.println(chemList);
 		return "previewBatch";	
 	}
 }

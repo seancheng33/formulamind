@@ -8,4 +8,5 @@ public interface BatchDAO {
 	public void addBatch(Batch batch);
 	public List getAllBatchByPager(int page,int pageSize);
 	public Integer getCountOfBatch();
+	public Integer getLastBatchSerials();
 }
