@@ -1,6 +1,6 @@
 package au.com.phytoline.action;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +75,7 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	public String toAddBatch(){
 		List productList = productService.getAllProduct();
 		int serials =batchService.getLastBatchSerials()+1;
-		System.out.println(serials);
+		//System.out.println(serials);
 		request.put("productList",productList);
 		request.put("serials",serials);
 		return "newbatch";
@@ -84,7 +84,18 @@ public class BatchAction extends ActionSupport implements RequestAware,
 		Product product=productService.findProductById(pid);
 		batch.setProduct(product);
 		batchService.addBatch(batch);
-		
+		List chemList = productDetailsService.getDetailsByProductId(pid);
+		for(int i=0;i<chemList.size();i++){
+			batchDetails = new BatchDetails();
+		batchDetails.setBserials(batch.getBatchSerials());
+		ProductDetails productDetails = (ProductDetails) chemList.get(i);
+		batchDetails.setChemName(productDetails.getChemName());
+		batchDetails.setBcode(batch.getBatchCode());
+		batchDetails.setPname(batch.getProduct().getPname());
+		batchDetails.setQuantity(batch.getBatchQuantity());
+		batchDetails.setQtyRequired(productDetails.getPercent()*batch.getBatchQuantity()/100);
+		batchDetailsService.addBatchDetails(batchDetails);
+		}
 		return "batchadd";
 	}
 	public String previonsBatchDetails(){
@@ -96,9 +107,20 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	public String previewBatch(){
 		Product product=productService.findProductById(pid);
 		batch.setProduct(product);
-		List chemList = productDetailsService.getDetailsByProductId(pid);
-		request.put("chemList", chemList);
-		//System.out.println(chemList);
+		List<?> chemList = productDetailsService.getDetailsByProductId(pid);
+		List<BatchDetails> details = new ArrayList<BatchDetails>();
+		for(int i=0;i<chemList.size();i++){
+			batchDetails = new BatchDetails();
+		batchDetails.setBserials(batch.getBatchSerials());
+		ProductDetails productDetails = (ProductDetails) chemList.get(i);
+		batchDetails.setChemName(productDetails.getChemName());
+		batchDetails.setBcode(batch.getBatchCode());
+		batchDetails.setPname(batch.getProduct().getPname());
+		batchDetails.setQuantity(batch.getBatchQuantity());
+		batchDetails.setQtyRequired(productDetails.getPercent()*batch.getBatchQuantity()/100);
+		details.add(batchDetails);
+		}
+		request.put("details", details);
 		return "previewBatch";	
 	}
 }

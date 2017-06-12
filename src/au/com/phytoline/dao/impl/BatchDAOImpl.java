@@ -49,7 +49,11 @@ public class BatchDAOImpl implements BatchDAO {
 		Session session=sessionFactory.getCurrentSession();
 		String hql="select max(batchSerials) from Batch";
 		Query query=session.createQuery(hql);
+		if(query.uniqueResult()!=null){
 		count= Integer.parseInt(query.uniqueResult().toString()) ;
+		}else{
+			count=0;
+		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}

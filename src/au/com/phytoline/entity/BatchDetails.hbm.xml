@@ -13,8 +13,8 @@
         <property name="bserials" type="java.lang.Integer">
             <column name="bserials" />
         </property>
-        <property name="pname" type="java.lang.Integer">
-            <column name="pname" />
+        <property name="pname" type="java.lang.String">
+            <column name="pname" length="100" />
         </property>
         <property name="bcode" type="java.lang.String">
             <column name="bcode" length="10" />

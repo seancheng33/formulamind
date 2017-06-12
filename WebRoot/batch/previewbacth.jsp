@@ -18,14 +18,52 @@ function printit(){
   $("#batchPrint").print({iframe:true,prepend:'<br/>'}); 
 } 
 </script> 
-</head>
+    <!-- Demo page code -->
+    
+    <style type="text/css">
+        #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+        .brand { font-family: georgia, serif; }
+        .brand .first {
+            color: #ccc;
+            font-style: italic;
+        }
+        .brand .second {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
 
-<body>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="javascripts/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7"> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8"> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9"> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+  <body> 
+  <!--<![endif]-->
 	<jsp:include page="../header.jsp" />
 <div class="container-fluid">
+<div class="row-fluid">
 	<jsp:include page="../left.jsp" />
 	<div class="span9">
-		<h1 class="page-title">Production Batch Sheet</h1>
+<!-- 		<h1 class="page-title">Production Batch Sheet</h1> -->
 		<div class="btn-toolbar">
 			<button class="btn btn-primary"><i
 				class="icon-print" onclick="printit()"></i> Print</button> <a href="#"
@@ -64,16 +102,22 @@ function printit(){
     <th width="50%" align="left">Chemical Name</th>
     <th width="20%">Quantity<br>Required(Kg)</th>
     <th width="15%">Quantity<br>Added(Kg)</th>
-    <th width="15%">Added "&radic;"</th>
+    <th width="15%">Added  "✔"</th>
   </tr>
-  <s:iterator id="chemical" value="#request.chemList">
+  <s:iterator id="batchDetails" value="#request.details">
   <tr>
-  <td>${chemical.chemName}</td>
-  <td></td>
+  <td>${batchDetails.chemName}</td>
+  <td>${batchDetails.qtyRequired}</td>
   <td></td>
   <td></td>
   </tr>
   </s:iterator>
+    <tr>
+  <td></td>
+  <td>Total:</td>
+  <td></td>
+  <td></td>
+  </tr>
   </table>
     </td>
   </tr>
@@ -85,7 +129,7 @@ function printit(){
   </tr>
 </table>
 		</div>
-	</div></div>
+	</div></div></div>
 	<footer>
 		<jsp:include page="../footer.jsp" />
 	</footer>

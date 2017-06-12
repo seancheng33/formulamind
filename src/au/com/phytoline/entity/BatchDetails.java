@@ -10,7 +10,7 @@ public class BatchDetails implements java.io.Serializable {
 
 	private Integer bdid;
 	private Integer bserials;
-	private Integer pname;
+	private String pname;
 	private String bcode;
 	private String chemName;
 	private Double quantity;
@@ -23,7 +23,7 @@ public class BatchDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BatchDetails(Integer bserials, Integer pname, String bcode,
+	public BatchDetails(Integer bserials, String pname, String bcode,
 			String chemName, Double quantity, Double qtyRequired) {
 		this.bserials = bserials;
 		this.pname = pname;
@@ -51,11 +51,11 @@ public class BatchDetails implements java.io.Serializable {
 		this.bserials = bserials;
 	}
 
-	public Integer getPname() {
+	public String getPname() {
 		return this.pname;
 	}
 
-	public void setPname(Integer pname) {
+	public void setPname(String pname) {
 		this.pname = pname;
 	}
 
