@@ -72,7 +72,8 @@
 					<hr>
 				</div>
 						<s:textfield label="Chemical Name" name="chemical.cname" />
-						<s:select label="Supplier Name" list="#request.supplierList" name="sid" listKey="sid" listValue="sname" />
+<!-- 						<s:select label="Supplier Name" list="#request.supplierList" name="sid" listKey="sid" listValue="sname" /> -->
+						<sx:autocompleter label="Supplier Name" showDownArrow="true" autoComplete="true" list="#request.supplierList" name="sid"></sx:autocompleter>
 						<s:textfield label="Price" name="chemical.price" />
 					</s:form>
 				</div>

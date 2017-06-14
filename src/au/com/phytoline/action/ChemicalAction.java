@@ -1,5 +1,6 @@
 package au.com.phytoline.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,8 +133,18 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	}
 
 	public String toAddChemical() throws Exception {
-		List supplierList = supplierService.getAllSupplier();
-		request.put("supplierList", supplierList);
+		List supplierList = supplierService.getAllSupplier();	
+		
+		Supplier supplier;
+		List<String> supplierDate = new ArrayList();
+		
+		for(int i =0;i<supplierList.size();i++){
+			supplier = (Supplier) supplierList.get(i);
+			supplierDate.add(supplier.getSname());
+		}
+		
+		//request.put("supplierList", supplierList);
+		request.put("supplierList", supplierDate);
 		return "chemical_add";
 	}
 
@@ -165,24 +176,6 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		chemical = chemicalService.getChemicalById(cid);
 		chemicalService.deleteChemial(chemical);
 		return "chemicallist";
-	}
-	
-	public String ajaxChemicalList(){
-		int curPage = 1;
-		if (pager != null) {
-			curPage = pager.getCurPage();
-		}
-		List chemicalList = null;
-			// 无查询条件，获取supplier的列表
-			chemicalList = chemicalService.getAllChemicalByPage(curPage, 10);
-			pager = chemicalService.getCountOfChemical(10);
-		
-		pager.setCurPage(curPage);
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("chemicalList", chemicalList);			
-		JSONObject json = JSONObject.fromObject(map);//将map对象转换成json类型数据
-		result = json.toString();//给result赋值，传递给页面
-		return "ajaxlist";
 	}
 	
 }

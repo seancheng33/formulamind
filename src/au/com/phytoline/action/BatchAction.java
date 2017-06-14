@@ -38,6 +38,7 @@ public class BatchAction extends ActionSupport implements RequestAware,
 		this.productService = productService;
 	}
 	int pid;
+	int bid;
 	Batch batch;
 	BatchDetails batchDetails;
 	
@@ -59,6 +60,13 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	public int getPid() {
 		return pid;
 	}
+	public void setBid(int bid) {
+		this.bid = bid;
+	}
+	public int getBid() {
+		return bid;
+	}
+	
 	Map<String, Object> session;
 	@Override
 	public void setSession(Map<String, Object> session) {
@@ -122,5 +130,13 @@ public class BatchAction extends ActionSupport implements RequestAware,
 		}
 		request.put("details", details);
 		return "previewBatch";	
+	}
+	
+	public String batchDetails(){
+		batch = batchService.getBatchById(bid);
+		List<?> batchDetailsList=batchDetailsService.getBatchDetailsByBatchNo(batch.getBatchCode());
+		request.put("batch", batch);
+		request.put("batchDetailsList", batchDetailsList);
+		return "batchDetails";	
 	}
 }

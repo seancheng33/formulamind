@@ -1,5 +1,7 @@
 package au.com.phytoline.service.impl;
 
+import java.util.List;
+
 import au.com.phytoline.dao.BatchDetailsDAO;
 import au.com.phytoline.entity.BatchDetails;
 import au.com.phytoline.service.BatchDetailsService;
@@ -12,6 +14,10 @@ public void setBatchDetailsDAO(BatchDetailsDAO batchDetailsDAO) {
 	@Override
 	public void addBatchDetails(BatchDetails batchDetails) {
 		batchDetailsDAO.addBatchDetails(batchDetails);
+	}
+	@Override
+	public List getBatchDetailsByBatchNo(String BatchNo) {
+		return batchDetailsDAO.getBatchDetailsByBatchNo(BatchNo);
 	}
 
 }

@@ -39,4 +39,9 @@ public class BatchServiceImpl implements BatchService {
 		return count;
 	}
 
+	@Override
+	public Batch getBatchById(int id) {
+		return batchDAO.getBatchById(id);
+	}
+
 }

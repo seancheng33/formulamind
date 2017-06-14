@@ -60,4 +60,11 @@ public class BatchDAOImpl implements BatchDAO {
 		return count;
 	}
 
+	@Override
+	public Batch getBatchById(int id) {
+		Session session=sessionFactory.getCurrentSession();
+		Batch batch = (Batch) session.get(Batch.class, id);
+		return batch;
+	}
+
 }

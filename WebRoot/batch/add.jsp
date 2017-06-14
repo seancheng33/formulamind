@@ -24,6 +24,9 @@ function previewBatch(){
     document.newbatch.action="previewBatch";
     document.newbatch.submit();
 }
+function checkFormat(){
+	
+}
 </script>
 
     <!-- Demo page code -->

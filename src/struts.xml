@@ -55,11 +55,6 @@
 		<action name="deleteChemical" class="chemicalAction" method="deleteChemical">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
 		</action>
-<!-- 		<action name="ajaxChemicalList" class="chemicalAction" method="ajaxChemicalList"> -->
-<!-- 			<result type="json" name="ajaxlist"> -->
-<!-- 			<param name="root">result</param> -->
-<!-- 			</result> -->
-<!-- 		</action> -->
 	</package>
 
 	<package name="product" extends="formulamind" namespace="/">
@@ -90,6 +85,9 @@
 		<action name="previonsBatchDetails" class="batchAction"
 			method="previonsBatchDetails">
 			<result name="previonsBatchDetails">batch/viewBatch.jsp</result>
+		</action>
+		<action name="batchDetails" class="batchAction" method="batchDetails">
+			<result name="batchDetails">batch/viewdetails.jsp</result>
 		</action>
 	</package>
 </struts>    

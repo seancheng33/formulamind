@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
 
 <script src="lib/jquery.min.js" type="text/javascript"></script>
-<script src="lib/jquery.print.min.js" type="text/javascript" ></script>
-<script type="text/javascript"> 
-function printit(){ 
-  $("#batchPrint").print({iframe:true,prepend:'<br/>'}); 
-} 
-</script> 
+<script type="text/javascript" src="lib/jquery.PrintArea.js"></script>
+<script type="text/javascript">
+    function printBatch(){
+    	$("#batchPrint").printArea();
+    }
+</script>
     <!-- Demo page code -->
     
     <style type="text/css">
@@ -65,13 +65,15 @@ function printit(){
 	<div class="span9">
 <!-- 		<h1 class="page-title">Production Batch Sheet</h1> -->
 		<div class="btn-toolbar">
-			<button class="btn btn-primary"><i
-				class="icon-print" onclick="printit()"></i> Print</button> <a href="#"
+			<button class="btn btn-primary" onclick="printBatch()"><i
+				class="icon-print"></i> Print</button>
+				<a href="#"
 				class="btn" onclick="javascript:history.back(-1);"><i
 				class="icon-circle-arrow-left"></i>Back</a>
 			<div class="btn-group"></div>
 		</div>
-		<div class="well" id="batchPrint">
+		<div class="well" >
+		<div id="batchPrint">
 <table width="100%" >
   <tr align="center">
     <td colspan="2"><h1>Production Batch Sheet</h1></td>
@@ -104,10 +106,10 @@ function printit(){
     <th width="15%">Quantity<br>Added(Kg)</th>
     <th width="15%">Added  "✔"</th>
   </tr>
-  <s:iterator id="batchDetails" value="#request.details">
+  <s:iterator id="chemDetail" value="#request.details">
   <tr>
-  <td>${batchDetails.chemName}</td>
-  <td>${batchDetails.qtyRequired}</td>
+  <td>${chemDetail.chemName}</td>
+  <td>${chemDetail.qtyRequired}</td>
   <td></td>
   <td></td>
   </tr>
@@ -128,7 +130,7 @@ function printit(){
     <td colspan="2"></td>
   </tr>
 </table>
-		</div>
+		</div></div>
 	</div></div></div>
 	<footer>
 		<jsp:include page="../footer.jsp" />

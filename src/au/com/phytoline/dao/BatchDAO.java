@@ -9,4 +9,5 @@ public interface BatchDAO {
 	public List getAllBatchByPager(int page,int pageSize);
 	public Integer getCountOfBatch();
 	public Integer getLastBatchSerials();
+	public Batch getBatchById(int id);
 }

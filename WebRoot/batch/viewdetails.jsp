@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
 
 <script src="lib/jquery.min.js" type="text/javascript"></script>
+<script src="lib/jquery.PrintArea.js" type="text/javascript" ></script>
+<script type="text/javascript"> 
+function printBatch(){ 
+	$("#batchPrint").printArea();
+} 
+</script> 
     <!-- Demo page code -->
     
     <style type="text/css">
@@ -57,65 +63,66 @@
 <div class="row-fluid">
 	<jsp:include page="../left.jsp" />
 	<div class="span9">
-		<h1 class="page-title">Suppliers</h1>
-		<div class="well search-well">
-			<form class="form-inline" method="post" action="supplierlist">
-				<s:textfield label="Search supplier name" name="nameSearch" />
-				<button class="btn" type="submit">
-					<i class="icon-search"></i> Go
-				</button>
-			</form>
-		</div>
+<!-- 		<h1 class="page-title">Production Batch Sheet</h1> -->
 		<div class="btn-toolbar">
-			<a href="toaddSupplier" class="btn btn-primary"><i
-				class="icon-plus"></i> Print</a> <a href="previonsBatchDetails"
-				class="btn">Back to Batch List</a>
+			<button class="btn btn-primary" onclick="printBatch()"><i
+				class="icon-print"></i> Print</button> <a href="previonsBatchDetails"
+				class="btn"><i
+				class="icon-circle-arrow-left"></i>Back to batch details list</a>
 			<div class="btn-group"></div>
 		</div>
-		<div class="well">
-<table>
+		<div class="well" >
+		<div id="batchPrint">
+<table width="100%" >
+  <tr align="center">
+    <td colspan="2"><h1>Production Batch Sheet</h1></td>
+  </tr>
   <tr>
-    <td></td>
-    <td><label>Serial No:</label><s:property /></td>
+    <td width="70%"></td>
+    <td>Serial No:<s:property value="#request.batch.batchSerials"/></td>
   </tr>
   <tr>
     <td></td>
-    <td><label>Batch No:</label><s:property/></td>
+    <td>Batch No:<s:property value="#request.batch.batchCode"/></td>
   </tr>
   <tr>
-    <td><label>Product Name:</label><s:property/></td>
-    <td><label>Batch Date:</label><s:property/></td>
+    <td>Product Name:<s:property value="#request.batch.product.pname"/></td>
+    <td>Batch Date:<s:property value="#request.batch.batchDate" /></td>
   </tr>
   <tr>
-    <td><label>Operator:</label><s:property/></td>
-    <td><label>Total Quantity:</label><s:property/></td>
+    <td>Operator:<s:property value="#request.batch.operatorName"/></td>
+    <td>Total Quantity:<s:property value="#request.batch.batchQuantity"/></td>
   </tr>
   <tr>
-    <td colspan="2"><hr></td>
-  </tr>
-  <tr>
-    <td><label>Chemical Name:</label></td>
-    <td><label>Quantity(Kg):</label></td>
-  </tr>
-    <tr>
     <td colspan="2"><hr></td>
   </tr>
   <tr>
     <td colspan="2">
-    <table>
+    <table width="100%" border="1">
       <tr>
-    <td><label>Chemical Name:</label></td>
-    <td><label>Quantity(Kg):</label></td>
-  </tr></table>
+    <th width="50%" align="left">Chemical Name</th>
+    <th width="20%">Quantity(Kg)</th>
+  </tr>
+  <s:iterator id="batchDetails" value="#request.batchDetailsList">
+  <tr>
+  <td>${batchDetails.chemName}</td>
+  <td>${batchDetails.qtyRequired}</td>
+  </tr>
+  </s:iterator>
+    <tr>
+  <td></td>
+  <td>Total:</td>
+  </tr>
+  </table>
     </td>
   </tr>
     <tr>
-    <td colspan="2">Other Information:</td>
+    <td colspan="2">Other Information:<br><s:property value="#request.batch.binfo"/></td>
   </tr>
       <tr>
     <td colspan="2"></td>
   </tr>
-</table>
+</table></div>
 		</div>
 	</div></div></div>
 	<footer>
