@@ -28,6 +28,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	SupplierService supplierService;
 	String nameSearch;
 	int sid;
+	String sname;
 	String result;
 	
 	public String getResult() {
@@ -45,7 +46,12 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
-
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 	public String getNameSearch() {
 		return nameSearch;
 	}

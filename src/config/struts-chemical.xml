@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<!-- chemical的action包 -->
+	<package name="chemical" extends="formulamind" namespace="/">
+		<action name="chemicallist" class="chemicalAction" method="chemicalList">
+			<result name="chemicallist">chemical/index.jsp</result>
+		</action>
+		<action name="toAddChemical" class="chemicalAction" method="toAddChemical">
+			<result name="chemical_add">chemical/add.jsp</result>
+		</action>
+		<action name="addChemical" class="chemicalAction" method="addChemical">
+			<result name="chemicallist" type="redirectAction">chemicallist</result>
+		</action>
+		<action name="chemicalDetails" class="chemicalAction" method="chemicalDetails">
+			<result name="chemicalDetails">chemical/details.jsp</result>
+		</action>
+		<action name="toChemicalModify" class="chemicalAction" method="toChemicalModify">
+			<result name="chemical_edit">chemical/update.jsp</result>
+		</action>
+		<action name="doChemicalModify" class="chemicalAction" method="doChemicalModify">
+			<result name="chemicallist" type="redirectAction">chemicallist</result>
+		</action>
+		<action name="deleteChemical" class="chemicalAction" method="deleteChemical">
+			<result name="chemicallist" type="redirectAction">chemicallist</result>
+		</action>
+	</package>
+</struts>

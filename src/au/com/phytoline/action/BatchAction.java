@@ -15,6 +15,7 @@ import au.com.phytoline.service.BatchDetailsService;
 import au.com.phytoline.service.BatchService;
 import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
+import au.com.phytoline.util.PagerNumber;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -83,7 +84,6 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	public String toAddBatch(){
 		List productList = productService.getAllProduct();
 		int serials =batchService.getLastBatchSerials()+1;
-		//System.out.println(serials);
 		request.put("productList",productList);
 		request.put("serials",serials);
 		return "newbatch";

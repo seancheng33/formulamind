@@ -7,87 +7,10 @@
 	<package name="formulamind" extends="struts-default" namespace="/">
 
 	</package>
+	
+	<include file="config/struts-supplier.xml" ></include>
+	<include file="config/struts-chemical.xml" ></include>
+	<include file="config/struts-product.xml" ></include>
+	<include file="config/struts-batch.xml" ></include>
 
-	<!-- supplier的action包 -->
-	<package name="supplier" extends="formulamind" namespace="/">
-		<action name="supplierlist" class="supplierAction" method="supplierList">
-			<result name="supplierlist">supplier/index.jsp</result>
-		</action>
-		<action name="toaddSupplier" class="supplierAction" method="toAddSupplier">
-			<result name="supplier_add">supplier/add.jsp</result>
-		</action>
-		<action name="addSupplier" class="supplierAction" method="addSupplier">
-			<result name="supplierlist" type="redirectAction">supplierlist</result>
-		</action>
-		<action name="toSupplierModify" class="supplierAction" method="toSupplierModify">
-			<result name="supplier_modify">supplier/update.jsp</result>
-		</action>
-		<action name="doSupplierModify" class="supplierAction" method="doSupplierModify">
-			<result name="supplierlist" type="redirectAction">supplierlist</result>
-		</action>
-		<action name="deleteSupplier" class="supplierAction" method="deleteSupplier">
-			<result name="supplierlist" type="redirectAction">supplierlist</result>
-		</action>
-		<action name="supplierDetails" class="supplierAction" method="supplierDetails">
-			<result name="supplierDetails">supplier/details.jsp</result>
-		</action>
-	</package>
-	<!-- chemical的action包 -->
-	<package name="chemical" extends="formulamind" namespace="/">
-		<action name="chemicallist" class="chemicalAction" method="chemicalList">
-			<result name="chemicallist">chemical/index.jsp</result>
-		</action>
-		<action name="toAddChemical" class="chemicalAction" method="toAddChemical">
-			<result name="chemical_add">chemical/add.jsp</result>
-		</action>
-		<action name="addChemical" class="chemicalAction" method="addChemical">
-			<result name="chemicallist" type="redirectAction">chemicallist</result>
-		</action>
-		<action name="chemicalDetails" class="chemicalAction" method="chemicalDetails">
-			<result name="chemicalDetails">chemical/details.jsp</result>
-		</action>
-		<action name="toChemicalModify" class="chemicalAction" method="toChemicalModify">
-			<result name="chemical_edit">chemical/update.jsp</result>
-		</action>
-		<action name="doChemicalModify" class="chemicalAction" method="doChemicalModify">
-			<result name="chemicallist" type="redirectAction">chemicallist</result>
-		</action>
-		<action name="deleteChemical" class="chemicalAction" method="deleteChemical">
-			<result name="chemicallist" type="redirectAction">chemicallist</result>
-		</action>
-	</package>
-
-	<package name="product" extends="formulamind" namespace="/">
-		<action name="productlist" class="productAction" method="productList">
-			<result name="productlist">production/index.jsp</result>
-		</action>
-		<action name="productDetails" class="productAction" method="productDetails">
-			<result name="productDetails">production/details.jsp</result>
-		</action>
-		<action name="addProduct" class="productAction" method="addProduct">
-			<result name="productlist" type="redirectAction">productlist</result>
-		</action>
-		<action name="toAddProduct" class="productAction" method="toAddProduct">
-			<result name="addProduct">production/add.jsp</result>
-		</action>
-	</package>
-
-	<package name="batch" extends="formulamind" namespace="/">
-		<action name="toAddBatch" class="batchAction" method="toAddBatch">
-			<result name="newbatch">batch/add.jsp</result>
-		</action>
-		<action name="doAddBatch" class="batchAction" method="doAddBatch">
-			<result name="batchadd" type="redirectAction">toAddBatch</result>
-		</action>
-		<action name="previewBatch" class="batchAction" method="previewBatch">
-			<result name="previewBatch">batch/previewbacth.jsp</result>
-		</action>
-		<action name="previonsBatchDetails" class="batchAction"
-			method="previonsBatchDetails">
-			<result name="previonsBatchDetails">batch/viewBatch.jsp</result>
-		</action>
-		<action name="batchDetails" class="batchAction" method="batchDetails">
-			<result name="batchDetails">batch/viewdetails.jsp</result>
-		</action>
-	</package>
 </struts>    

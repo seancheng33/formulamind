@@ -70,14 +70,14 @@
 					<div class="btn-group"></div>
 					<hr>
 				</div>
-						<s:textfield label="Supplier Name" name="supplier.sname" />
+						<s:fielderror/>
+						<s:textfield label="Supplier Name" name="supplier.sname" />*
 						<s:textfield label="Address" name="supplier.address" />
 						<s:textfield label="Suburb" name="supplier.suburb" />
 						<s:textfield label="Postcode" name="supplier.postcode" />
 						<s:textfield label="Phone" name="supplier.phone" />
 						<s:textfield label="Fax" name="supplier.fax" />
 						<s:textfield label="Contact" name="supplier.contact" />
-<!-- 						<s:submit value="Add Supplier"></s:submit> -->
 					</s:form>
 				</div>
 			</div>

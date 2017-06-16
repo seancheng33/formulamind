@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<!-- batch的action包 -->
+	<package name="batch" extends="formulamind" namespace="/">
+		<action name="toAddBatch" class="batchAction" method="toAddBatch">
+			<result name="newbatch">batch/add.jsp</result>
+		</action>
+		<action name="doAddBatch" class="batchAction" method="doAddBatch">
+			<result name="batchadd" type="redirectAction">toAddBatch</result>
+		</action>
+		<action name="previewBatch" class="batchAction" method="previewBatch">
+			<result name="previewBatch">batch/previewbacth.jsp</result>
+		</action>
+		<action name="previonsBatchDetails" class="batchAction"
+			method="previonsBatchDetails">
+			<result name="previonsBatchDetails">batch/viewBatch.jsp</result>
+		</action>
+		<action name="batchDetails" class="batchAction" method="batchDetails">
+			<result name="batchDetails">batch/viewdetails.jsp</result>
+		</action>
+	</package>
+</struts>

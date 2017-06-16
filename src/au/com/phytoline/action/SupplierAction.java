@@ -108,6 +108,10 @@ public class SupplierAction extends ActionSupport implements SessionAware,
 	}
 
 	public String addSupplier() throws Exception {
+		if(supplier.getSname()==null||supplier.getSname().equals("")){
+			this.addFieldError("name", "supplier name can't empyt");
+			return "error";
+		}
 		supplier.setScreatedate(new Date());
 		supplierService.addSupplier(supplier);
 		return "supplierlist";
