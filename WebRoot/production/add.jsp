@@ -75,9 +75,10 @@
 			<div class="well">
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane active in" id="home">
-						<s:form action="/addProduct" method="post">
+<!-- 						<s:form action="/addProduct" method="post"></s:form> -->
+						<s:form action="" method="post">
 							<div class="btn-toolbar">
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="btn btn-primary" onclick="savePro()">
 									<i class="icon-save"></i> Save
 								</button>
 								<a href="productlist" class="btn">Cancel</a>

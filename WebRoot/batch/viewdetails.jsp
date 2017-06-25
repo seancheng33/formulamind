@@ -15,7 +15,7 @@
 <script src="lib/jquery.PrintArea.js" type="text/javascript" ></script>
 <script type="text/javascript"> 
 function printBatch(){ 
-	$("#batchPrint").printArea();
+	$("#batchPrint").printArea({mode:'popup'});
 } 
 </script> 
     <!-- Demo page code -->
