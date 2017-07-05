@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<!-- chemical的action包 -->
-	<package name="chemical" extends="formulamind" namespace="/">
+	<!-- chemical的action包 -->
+	<package name="chemical" extends="formulamind,json-default"
+		namespace="/">
 		<action name="chemicallist" class="chemicalAction" method="chemicalList">
 			<result name="chemicallist">chemical/index.jsp</result>
 		</action>
@@ -23,6 +24,11 @@
 		</action>
 		<action name="deleteChemical" class="chemicalAction" method="deleteChemical">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
+		</action>
+		<action name="ajaxChemicalList" class="chemicalAction" method="ajaxChemicalList">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
 		</action>
 	</package>
 </struts>

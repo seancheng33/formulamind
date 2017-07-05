@@ -85,7 +85,8 @@
 	</bean>
 	<bean id="chemicalAction" class="au.com.phytoline.action.ChemicalAction"
 		scope="prototype">
-		<!-- scope="prototype" 每一次请求都是产生一个新的实例，如果不加，会导致页面还在使用之前的数据等一系列数据显示混乱的问题 -->
+		<!-- scope="prototype" 每一次请求都是产生一个新的实例，
+		如果不加，会导致页面还在使用之前的数据等一系列数据显示混乱的问题 -->
 		<property name="chemicalService" ref="chemicalService" />
 		<property name="supplierService" ref="supplierService" />
 	</bean>
@@ -108,6 +109,7 @@
 		scope="prototype">
 		<property name="productService" ref="productService" />
 		<property name="productDetailsService" ref="productDetailsService" />
+		<property name="chemicalService" ref="chemicalService" />
 	</bean>
 
 	<!-- batch -->

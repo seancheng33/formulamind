@@ -218,22 +218,7 @@
 
     
     <footer>
-        <hr>
-        
-        <p class="pull-right">Collect from <a href="http://www.mycodes.net/" title="网页模板" target="_blank">网页模板</a> </p>
-        
-        
-        <p>&copy; 2012 <a href="#">Portnine</a></p>
+<jsp:include page="footer.jsp" />
     </footer>
-    
-
-    
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="lib/bootstrap/js/bootstrap.js"></script>
-  
-
   </body>
 </html>

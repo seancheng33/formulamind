@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
@@ -184,4 +185,22 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		return "chemicallist";
 	}
 	
+	public String ajaxChemicalList()throws Exception {
+		List chemicalList = chemicalService.getAllChemicalByPage(1, 50);
+		List chemList = new ArrayList();
+		for(int i=0;i<chemicalList.size();i++){
+			Map<String,Object> chem =new HashMap<String, Object>();
+			chem.put("id", ((Chemical) chemicalList.get(i)).getCid());
+			chem.put("name", ((Chemical) chemicalList.get(i)).getCname());
+			chem.put("price", ((Chemical) chemicalList.get(i)).getPrice());
+			chemList.add(chem);
+		}
+		
+		//用这个的话会报错JSONObject json = JSONObject.fromObject(chemList);
+
+		//因为是List，所以是需要用JSONArray？
+		JSONArray json = JSONArray.fromObject(chemList);
+		result = json.toString();
+		return SUCCESS;
+	}
 }

@@ -6,21 +6,29 @@ import java.util.Map;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 import au.com.phytoline.entity.Pager;
 import au.com.phytoline.entity.Product;
-import au.com.phytoline.entity.ProductDetails;
+import au.com.phytoline.service.ChemicalService;
 import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 public class ProductAction extends ActionSupport implements RequestAware,
 		SessionAware {
 	private static final long serialVersionUID = -2208805501107669256L;
 	ProductService productService;
 	ProductDetailsService productDetailsService;
+	ChemicalService chemicalService;
 	Pager pager;
 	Product product;
+	List chemList;
+	public void setChemList(List chemList) {
+		this.chemList = chemList;
+	}
+	public List getChemList() {
+		return chemList;
+	}
 	public Product getProduct() {
 		return product;
 	}
@@ -40,7 +48,9 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		this.pager = pager;
 	}
 
-
+	public void setChemicalService(ChemicalService chemicalService) {
+		this.chemicalService = chemicalService;
+	}
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
@@ -92,9 +102,20 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String toAddProduct(){
+		//这里需要查询并传值chemical的全部list给页面，用json的格式
+		chemList = chemicalService.getAllChemicalByPage(0, 100);
+		System.out.println(chemList);
+		request.put("chemList", chemList);
 		return "addProduct";
 	}
-	public String addProduct(){
+	public String doAddProduct(){
+		Object obj = request.get("chemList");
+		//JSONObject json = JSONObject.fromObject(request.get("chemList"));
+		String str = obj.toString();
+		
+		System.out.println(str.replaceAll(" ", ""));
+		
+		
 		return "productlist";
 	}
 }

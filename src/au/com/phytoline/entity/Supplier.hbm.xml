@@ -36,7 +36,7 @@
         <property name="smodifydate" type="java.sql.Date">
             <column name="smodifydate" length="10" />
         </property>
-        <set name="chemicals" inverse="true" lazy="false" cascade="delete">
+        <set name="chemicals" inverse="true" lazy="false" cascade="none">
             <key>
                 <column name="sid" />
             </key>

@@ -14,7 +14,6 @@ import au.com.phytoline.service.SupplierService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-//TODO 录入数据的校验，电话格式，邮编格式
 
 public class SupplierAction extends ActionSupport implements SessionAware,
 		RequestAware {
@@ -108,24 +107,32 @@ public class SupplierAction extends ActionSupport implements SessionAware,
 	}
 
 	public String addSupplier() throws Exception {
+		//先校验各种数据的合法性等
 		if(supplier.getSname()==null||supplier.getSname().equals("")){
 			this.addFieldError("name", "supplier name can't empyt");
 			return "error";
 		}
+		String pcode = supplier.getPostcode();
+		
+		if(pcode.length()!=9){
+		this.addFieldError("postcode", "postcode length is 9 and the format is XXXX-XXXX.");
+		return "error";
+		}
+		//在创建时间中填上当前时间
 		supplier.setScreatedate(new Date());
 		supplierService.addSupplier(supplier);
 		return "supplierlist";
 	}
 
 	public String toSupplierModify() throws Exception {
+		//根据页面传过来的sid的值，查找出对应的supplier，然后把值传给修改页面
 		supplier = supplierService.getSupplierById(sid);
-
 		request.put("supplier", supplier);
-
 		return "supplier_modify";
 	}
 
 	public String doSupplierModify() throws Exception {
+		//在更新数据前，先把修改时间填上当前时间
 		supplier.setSmodifydate(new Date());
 		supplierService.updateSupplier(supplier);
 		return "supplierlist";
