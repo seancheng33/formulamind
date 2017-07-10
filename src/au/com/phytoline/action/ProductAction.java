@@ -1,5 +1,7 @@
 package au.com.phytoline.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +10,14 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import au.com.phytoline.entity.Chemical;
 import au.com.phytoline.entity.Pager;
 import au.com.phytoline.entity.Product;
 import au.com.phytoline.service.ChemicalService;
 import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class ProductAction extends ActionSupport implements RequestAware,
 		SessionAware {
@@ -23,6 +28,13 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	Pager pager;
 	Product product;
 	List chemList;
+	String result;
+	public void setResult(String result) {
+		this.result = result;
+	}
+	public String getResult() {
+		return result;
+	}
 	public void setChemList(List chemList) {
 		this.chemList = chemList;
 	}
@@ -102,20 +114,37 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String toAddProduct(){
-		//这里需要查询并传值chemical的全部list给页面，用json的格式
-		chemList = chemicalService.getAllChemicalByPage(0, 100);
-		System.out.println(chemList);
+		
+		
+		
+		//System.out.println(chemList);
 		request.put("chemList", chemList);
 		return "addProduct";
 	}
 	public String doAddProduct(){
-		Object obj = request.get("chemList");
-		//JSONObject json = JSONObject.fromObject(request.get("chemList"));
-		String str = obj.toString();
-		
-		System.out.println(str.replaceAll(" ", ""));
-		
 		
 		return "productlist";
+	}
+	
+	public String ajaxChem() {
+		// 这里需要查询并传值chemical的全部list给页面，用json的格式
+		chemList = chemicalService.getAllChemicalByPage(0, 100);
+
+		ArrayList<Object> map = new ArrayList<Object>();
+		for (int i = 0; i < chemList.size(); i++) {
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			Chemical chem = (Chemical) chemList.get(i);
+
+			map2.put("cid", chem.getCid());
+			map2.put("cname", chem.getCname());
+			map2.put("price", chem.getPrice());
+			map.add(map2);
+		}
+
+		// JSONObject json = JSONObject.fromObject(map);
+		JSONArray json = JSONArray.fromObject(map);
+		result = json.toString();
+
+		return "ajaxChem";
 	}
 }

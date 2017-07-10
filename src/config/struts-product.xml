@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<!-- product的action包 -->
-	<package name="product" extends="formulamind,json-default" namespace="/">
+	<!-- product的action包 -->
+	<package name="product" extends="formulamind,json-default"
+		namespace="/">
 		<action name="productlist" class="productAction" method="productList">
 			<result name="productlist">production/index.jsp</result>
 		</action>
@@ -16,10 +17,12 @@
 			<result name="addProduct">production/add.jsp</result>
 		</action>
 		<action name="doAddProduct" class="productAction" method="doAddProduct">
-			<result name="productlist" type="json"><param name="root">chemList
-					<!-- result是action中设置的变量名，也是页面需要返回的数据，
-					该变量必须有setter和getter方法 -->
-				</param>productlist</result>
+			<result name="productlist" type="redirectAction">productlist</result>
+		</action>
+		<action name="ajaxChem" class="productAction" method="ajaxChem">
+			<result name="ajaxChem" type="json">
+				<param name="root">result</param>
+			</result>
 		</action>
 	</package>
 </struts>

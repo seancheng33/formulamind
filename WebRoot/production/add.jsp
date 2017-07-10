@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,17 +118,43 @@
 		//6,清除点击事件  
 		td.unbind("click");
 	}
+
+	function loadchem(tdobject) {
+		$.ajax({
+			type : "post",
+			url : "ajaxChem",
+			dataType : "json",
+			success : function(data) {
+				var d=eval("("+data+")");
+				for (var key in d) { //第一层循环取到各个d 
+					var chem = d[key];
+					//alert(chem.cname);
+					$(".chemlist").append("<option value='"+chem.cid+"'>"+chem.cname+"</option>");
+				}
+			},
+			error : function() {
+				alert("系统异常，稍后再试")
+			}
+		});
+		}
+
+	function chemselected(){
+		alert("success")
+	}
+
 	function addtr() {
 		var table = $("#para_table");
 		var tr = $("<tr>" +
+			"<td  onclick=''>" + "</td>" +
+			"<td  onclick=''><select class='chemlist' onchange='chemselected()'></select>" + "</td>" +
+			"<td  onclick=''>" + "</td>" +
+			"<td  onclick=''>" + "</td>" +
 			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  style='text-align:center;' align='center' onclick='deletetr(this)'><button type='button'  class='btn btn-xs btn-link' >" + "删除" + "</button></td></tr>");
+			"<td  onclick=''>" + "</td>" +
+			"<td  style='text-align:center;' align='center' onclick='deletetr(this)'><button type='button'  class='btn btn-xs btn-link' >" + 
+			"<i class='icon-trash'></i> Delete" + "</button></td></tr>");
 		table.append(tr);
+		loadchem(this);
 	}
 	function deletetr(tdobject) {
 		var td = $(tdobject);
@@ -158,7 +185,7 @@
 <!--[if IE 8 ]> <body class="ie ie8"> <![endif]-->
 <!--[if IE 9 ]> <body class="ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<body>
+<body onload='loadchem(this)'>
 	<!--<![endif]-->
 
 	<jsp:include page="../header.jsp" />
@@ -183,23 +210,23 @@
 
 								<table class="table  table-bordered" id="para_table">
 									<tr>
-										<th style="text-align:center" width="200">positon</th>
-										<th style="text-align:center" width="200">chem ID</th>
-										<th style="text-align:center" width="100">chemical</th>
-										<th style="text-align:center" width="200">price</th>
-										<th style="text-align:center" width="200">%percent</th>
-										<th style="text-align:center" width="100">Amount</th>
+										<th style="text-align:center" width="80">positon</th>
+										<th style="text-align:center" width="80">chem ID</th>
+										<th style="text-align:center" width="300">chemical</th>
+										<th style="text-align:center" width="80">price</th>
+										<th style="text-align:center" width="80">%percent</th>
+										<th style="text-align:center" width="80">Amount</th>
 										<th style="text-align:center" width="100">Operation</th>
 									</tr>
 									<tr>
+										<td style="text-align:center; " onclick=""></td>
+										<td style="text-align:center; " onclick=""><select onchange="chemselected()" class='chemlist' theme="simple"></select></td>
+										<td style="text-align:center; " onclick=""></td>
+										<td style="text-align:center; " onclick=""></td>
 										<td style="text-align:center; " onclick="tdclick(this)"></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
+										<td style="text-align:center; " onclick=""></td>
 										<td style="text-align:center; " onclick="deletetr(this)">
-											<button type="button" class="btn btn-xs btn-link">删除</button>
+											<button type="button" class="btn btn-xs btn-link"><i class="icon-trash"></i> Delete</button>
 										</td>
 									</tr>
 								</table>
@@ -207,7 +234,7 @@
 								<div id="addtrdiv"
 									style="margin-top:-15px; width: 15%; float: right;">
 									<button type="button" class="btn btn-xs btn-link"
-										onclick="addtr()">添加</button>
+										onclick="addtr()">Add New Chemical</button>
 								</div>
 
 
