@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +107,7 @@
 			}
 		});
 
-		//5，将文本框加入到td中  
+		//5，将文本框加入到td中  ,计算及添加值到amount列中
 		td.append(input);
 		var t = input.val();
 		input.val("").focus().val(t);
@@ -121,38 +119,56 @@
 
 	function loadchem(tdobject) {
 		$.ajax({
-			type : "post",
+			type : "get",
 			url : "ajaxChem",
 			dataType : "json",
 			success : function(data) {
 				var d=eval("("+data+")");
-				for (var key in d) { //第一层循环取到各个d 
+				for (var key in d) { //循环取到各个d 
 					var chem = d[key];
 					//alert(chem.cname);
-					$(".chemlist").append("<option value='"+chem.cid+"'>"+chem.cname+"</option>");
+					$(".chemlist").append("<option value='"+chem.cname+"'>"+chem.cid+"</option>");
 				}
 			},
 			error : function() {
 				alert("系统异常，稍后再试")
 			}
 		});
-		}
+	}
 
-	function chemselected(){
-		alert("success")
+	function chemselected(tdobject) {
+		//$(tdobject).find("option:selected").val()如果是val是取select的值，如果是text是取select的key
+		var chemname = $(tdobject).find("option:selected").val();
+		$.ajax({
+			type : "post",
+			url : "ajaxChemDetail",
+			data:{cid:$(tdobject).find("option:selected").text()},
+			dataType : "json",
+			success : function(data) {
+				var d=eval("("+data+")");
+				$(tdobject).parent("td").parent("tr").find("td:eq(2)").html(d.cname);
+				$(tdobject).parent("td").parent("tr").find("td:eq(3)").html(d.price);
+			},
+			error : function() {
+				alert("系统异常，稍后再试")
+			}
+		});
+		//var td = $(tdobject).partent("td");
+
+		//alert(td.innerHTML);
 	}
 
 	function addtr() {
 		var table = $("#para_table");
 		var tr = $("<tr>" +
-			"<td  onclick=''>" + "</td>" +
-			"<td  onclick=''><select class='chemlist' onchange='chemselected()'></select>" + "</td>" +
-			"<td  onclick=''>" + "</td>" +
-			"<td  onclick=''>" + "</td>" +
-			"<td  onclick='tdclick(this)'>" + "</td>" +
-			"<td  onclick=''>" + "</td>" +
-			"<td  style='text-align:center;' align='center' onclick='deletetr(this)'><button type='button'  class='btn btn-xs btn-link' >" + 
-			"<i class='icon-trash'></i> Delete" + "</button></td></tr>");
+			"<td  style='text-align:center;' onclick=''>" + "</td>" +
+			"<td  onclick=''><select class='chemlist' onchange='chemselected(this)'></select>" + "</td>" +
+			"<td  style='text-align:center;' onclick=''>" + "</td>" +
+			"<td  style='text-align:center;' onclick=''>" + "</td>" +
+			"<td  style='text-align:center;' onclick='tdclick(this)'>" + "</td>" +
+			"<td  style='text-align:center;' onclick=''>" + "</td>" +
+			"<td  style='text-align:center;' align='center'><button type='button'  class='btn btn-xs btn-link' onclick='deletetr(this)'>" + 
+			"<i class='icon-remove'></i> Delete" + "</button></td></tr>");
 		table.append(tr);
 		loadchem(this);
 	}
@@ -203,11 +219,33 @@
 									<button type="submit" class="btn btn-primary">
 										<i class="icon-save"></i> Save
 									</button>
-									<a href="supplierlist" class="btn">Cancel</a>
+									<a href="productlist" class="btn">Cancel</a>
 									<div class="btn-group"></div>
 									<hr>
 								</div>
-
+								<table class="table  table-bordered">
+								<tr>
+								<td>Product Name:</td>
+								<td>Product Code:</td>
+								<td>Date Created:</td>
+								</tr>
+								<tr>
+								<td><input type="text" /></td>
+								<td><input type="text" /></td>
+								<td><input type="datetime" /></td>
+								</tr>
+								<tr >
+								<td colspan="3">Other Information:</td>
+								</tr>
+								<tr >
+								<td colspan="3"><input type="text" /></td>
+								</tr>
+								</table>
+								<div id="addtrdiv"
+									style="margin-top:-15px; width: 15%; float: right;">
+									<button type="button" class="btn btn-xs btn-link"
+										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
+								</div>
 								<table class="table  table-bordered" id="para_table">
 									<tr>
 										<th style="text-align:center" width="80">positon</th>
@@ -220,13 +258,13 @@
 									</tr>
 									<tr>
 										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick=""><select onchange="chemselected()" class='chemlist' theme="simple"></select></td>
+										<td style="text-align:center; " onclick=""><select onchange="chemselected(this)" class='chemlist' ></select></td>
 										<td style="text-align:center; " onclick=""></td>
 										<td style="text-align:center; " onclick=""></td>
 										<td style="text-align:center; " onclick="tdclick(this)"></td>
 										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick="deletetr(this)">
-											<button type="button" class="btn btn-xs btn-link"><i class="icon-trash"></i> Delete</button>
+										<td style="text-align:center; " >
+											<button type="button" class="btn btn-xs btn-link" onclick="deletetr(this)"><i class="icon-remove"></i> Delete</button>
 										</td>
 									</tr>
 								</table>
@@ -234,9 +272,9 @@
 								<div id="addtrdiv"
 									style="margin-top:-15px; width: 15%; float: right;">
 									<button type="button" class="btn btn-xs btn-link"
-										onclick="addtr()">Add New Chemical</button>
+										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
-
+								
 
 							</s:form>
 						</div>

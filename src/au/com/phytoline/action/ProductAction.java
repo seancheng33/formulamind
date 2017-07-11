@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,8 +23,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class ProductAction extends ActionSupport implements RequestAware,
-		SessionAware {
+		SessionAware,ServletRequestAware{
 	private static final long serialVersionUID = -2208805501107669256L;
+	HttpServletRequest servletRequest;
 	ProductService productService;
 	ProductDetailsService productDetailsService;
 	ChemicalService chemicalService;
@@ -29,6 +33,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	Product product;
 	List chemList;
 	String result;
+
 	public void setResult(String result) {
 		this.result = result;
 	}
@@ -114,9 +119,6 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String toAddProduct(){
-		
-		
-		
 		//System.out.println(chemList);
 		request.put("chemList", chemList);
 		return "addProduct";
@@ -147,4 +149,26 @@ public class ProductAction extends ActionSupport implements RequestAware,
 
 		return "ajaxChem";
 	}
+	public String ajaxChemDetail() {
+		// 接收页面过来的传值，查询后返回页面
+
+		String cid = servletRequest.getParameter("cid");
+		System.out.println(cid);
+		Chemical chemical = chemicalService.getChemicalById(Integer.parseInt(cid));
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("cid", chemical.getCid());
+			map.put("cname", chemical.getCname());
+			map.put("price", chemical.getPrice());
+		JSONObject json = JSONObject.fromObject(map);
+		//JSONArray json = JSONArray.fromObject(map);
+		result = json.toString();
+
+		return "ajaxChemDetail";
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		// TODO Auto-generated method stub
+		this.servletRequest = arg0;
+	}
+
 }

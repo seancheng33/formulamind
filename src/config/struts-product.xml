@@ -24,5 +24,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="ajaxChemDetail" class="productAction" method="ajaxChemDetail">
+			<result name="ajaxChemDetail" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>
