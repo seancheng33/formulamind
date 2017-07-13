@@ -39,8 +39,6 @@
 	function save_para_table() {
 		var tableinfo = gettableinfo();
 		alert(tableinfo);
-
-
 	}
 	//get table infomation  
 	function gettableinfo() {
@@ -127,7 +125,8 @@
 				for (var key in d) { //循环取到各个d 
 					var chem = d[key];
 					//alert(chem.cname);
-					$(".chemlist").append("<option value='"+chem.cname+"'>"+chem.cid+"</option>");
+					//var chemdetails = chem.cid+" | "+chem.cname+" | "+chem.price;
+					$(".chemlist").append("<option value='"+chem.cid+"'>"+chem.cid+"</option>");
 				}
 			},
 			error : function() {
@@ -142,7 +141,7 @@
 		$.ajax({
 			type : "post",
 			url : "ajaxChemDetail",
-			data:{cid:$(tdobject).find("option:selected").text()},
+			data:{cid:$(tdobject).find("option:selected").val()},
 			dataType : "json",
 			success : function(data) {
 				var d=eval("("+data+")");
@@ -214,7 +213,7 @@
 				<div class="well">
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active in" id="home">
-							<s:form action="/addSupplier" method="post">
+							<s:form action="/addProduct" method="post">
 								<div class="btn-toolbar">
 									<button type="submit" class="btn btn-primary">
 										<i class="icon-save"></i> Save
@@ -252,7 +251,7 @@
 										<th style="text-align:center" width="80">chem ID</th>
 										<th style="text-align:center" width="300">chemical</th>
 										<th style="text-align:center" width="80">price</th>
-										<th style="text-align:center" width="80">%percent</th>
+										<th style="text-align:center" width="80">%</th>
 										<th style="text-align:center" width="80">Amount</th>
 										<th style="text-align:center" width="100">Operation</th>
 									</tr>
