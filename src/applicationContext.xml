@@ -11,7 +11,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/formula_mind">
 		</property>
 		<property name="username" value="sean"></property>
-		<property name="password" value="443414"></property>
+		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

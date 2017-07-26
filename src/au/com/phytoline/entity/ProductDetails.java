@@ -12,6 +12,7 @@ public class ProductDetails implements java.io.Serializable {
 	private Product product;
 	private String pcode;
 	private Integer position;
+	private String chemId;
 	private String chemName;
 	private Double chemPrice;
 	private Double percent;
@@ -24,11 +25,12 @@ public class ProductDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProductDetails(Product product, String pcode, Integer position,
+	public ProductDetails(Product product, String pcode, Integer position,String chemId,
 			String chemName, Double chemPrice, Double percent, Double amount) {
 		this.product = product;
 		this.pcode = pcode;
 		this.position = position;
+		this.chemId = chemId;
 		this.chemName = chemName;
 		this.chemPrice = chemPrice;
 		this.percent = percent;
@@ -36,6 +38,14 @@ public class ProductDetails implements java.io.Serializable {
 	}
 
 	// Property accessors
+
+	public String getChemId() {
+		return chemId;
+	}
+
+	public void setChemId(String chemId) {
+		this.chemId = chemId;
+	}
 
 	public Integer getPdid() {
 		return this.pdid;

@@ -16,6 +16,9 @@
         <property name="position" type="java.lang.Integer">
             <column name="position" />
         </property>
+        <property name="chemId" type="java.lang.Integer">
+            <column name="chem_id" length="11" />
+        </property>
         <property name="chemName" type="java.lang.String">
             <column name="chem_name" length="11" />
         </property>

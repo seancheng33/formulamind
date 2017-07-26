@@ -36,6 +36,8 @@
 </style>
 <!--  -->
 <script type="text/javascript">
+var rowsnum = 1;
+var tmpprecent;
 	function save_para_table() {
 		var tableinfo = gettableinfo();
 		alert(tableinfo);
@@ -105,14 +107,15 @@
 			}
 		});
 
-		//5，将文本框加入到td中  ,计算及添加值到amount列中
+		//5，将文本框加入到td中
 		td.append(input);
 		var t = input.val();
 		input.val("").focus().val(t);
 		//              input.focus();  
-
+		tmpprecent = input.val("").focus().val(t);//赋值给一个全局变量，方便后面计算amount
 		//6,清除点击事件  
 		td.unbind("click");
+		
 	}
 
 	function loadchem(tdobject) {
@@ -122,15 +125,19 @@
 			dataType : "json",
 			success : function(data) {
 				var d=eval("("+data+")");
+				//先添加一个空项
+				$(".chemlist").append("<option></option>");
+				
 				for (var key in d) { //循环取到各个d 
 					var chem = d[key];
 					//alert(chem.cname);
 					//var chemdetails = chem.cid+" | "+chem.cname+" | "+chem.price;
 					$(".chemlist").append("<option value='"+chem.cid+"'>"+chem.cid+"</option>");
 				}
+				
 			},
 			error : function() {
-				alert("系统异常，稍后再试")
+				alert("System exception, try again later.")
 			}
 		});
 	}
@@ -138,33 +145,50 @@
 	function chemselected(tdobject) {
 		//$(tdobject).find("option:selected").val()如果是val是取select的值，如果是text是取select的key
 		var chemname = $(tdobject).find("option:selected").val();
-		$.ajax({
-			type : "post",
-			url : "ajaxChemDetail",
-			data:{cid:$(tdobject).find("option:selected").val()},
-			dataType : "json",
-			success : function(data) {
-				var d=eval("("+data+")");
-				$(tdobject).parent("td").parent("tr").find("td:eq(2)").html(d.cname);
-				$(tdobject).parent("td").parent("tr").find("td:eq(3)").html(d.price);
-			},
-			error : function() {
-				alert("系统异常，稍后再试")
-			}
-		});
+		if (chemname !=""){
+			$.ajax({
+				type : "post",
+				url : "ajaxChemDetail",
+				data:{cid:$(tdobject).find("option:selected").val()},
+				dataType : "json",
+				success : function(data) {
+					var d=eval("("+data+")");
+					$(tdobject).parent("td").parent("tr").find("td:eq(2)").html(d.cname);
+					$(tdobject).parent("td").parent("tr").find("td:eq(3)").html(d.price);
+					var percentvalue = $(tdobject).parent("td").parent("tr").find("td:eq(4)").text();
+					$(tdobject).parent("td").parent("tr").find("td:eq(5)").html(percentvalue*d.price/100);
+				},
+				error : function() {
+					alert("System exception, try again later.")
+				}
+			});
+		}else{
+			$(tdobject).parent("td").parent("tr").find("td:eq(2)").html("");
+			$(tdobject).parent("td").parent("tr").find("td:eq(3)").html("");
+		}
 		//var td = $(tdobject).partent("td");
-
-		//alert(td.innerHTML);
+		//alert(percentvalue);
 	}
-
+	
+	function tdchange(tdobject) {
+			var percentvalue = tmpprecent.val();
+			var pricevalue = $(tdobject).parent("tr").find("td:eq(3)").text();
+			$(tdobject).parent("tr").find("td:eq(5)").html(percentvalue*pricevalue/100);
+			
+			}
+	function totalTable(){
+		
+		
+	}
 	function addtr() {
+		rowsnum +=1;
 		var table = $("#para_table");
 		var tr = $("<tr>" +
-			"<td  style='text-align:center;' onclick=''>" + "</td>" +
+			"<td  style='text-align:center;' onclick=''>"+ rowsnum + "</td>" +
 			"<td  onclick=''><select class='chemlist' onchange='chemselected(this)'></select>" + "</td>" +
 			"<td  style='text-align:center;' onclick=''>" + "</td>" +
 			"<td  style='text-align:center;' onclick=''>" + "</td>" +
-			"<td  style='text-align:center;' onclick='tdclick(this)'>" + "</td>" +
+			"<td  style='text-align:center;' onclick='tdclick(this)'  onchange='tdchange(this)'>0" + "</td>" +
 			"<td  style='text-align:center;' onclick=''>" + "</td>" +
 			"<td  style='text-align:center;' align='center'><button type='button'  class='btn btn-xs btn-link' onclick='deletetr(this)'>" + 
 			"<i class='icon-remove'></i> Delete" + "</button></td></tr>");
@@ -174,6 +198,46 @@
 	function deletetr(tdobject) {
 		var td = $(tdobject);
 		td.parents("tr").remove();
+	}
+	
+	function savetable() {
+		//ajax提交数据
+		var table = $("#para_table tr");
+		var pdata=[];
+		table.each(function() {
+			//遍历获取所有的table格，获得数据，再自己组合
+			var jdata = {
+				"position" : $(this).find('td').eq(0).text(),
+				"chemId" : $(this).find('td').eq(1).find("option:selected").val(),
+				"chemName" : $(this).find('td').eq(2).text(),
+				"chemPrice" : $(this).find('td').eq(3).text(),
+				"percent" : $(this).find('td').eq(4).text(),
+				"amount" : $(this).find('td').eq(5).text(),
+			}
+			pdata.push(jdata);
+		});
+
+		$.ajax({
+			type : "post",
+			url : "doAddProduct",
+			data : {
+			pcode:$("input[name=pcode]").val(),
+			pname:$("input[name=pname]").val(),
+			pdate:$("input[name=pdate]").val(),
+			pinfo:$("textarea[name=pinfo]").val(),
+			pdata:JSON.stringify(pdata)
+			//pdata:pdata
+			},
+			datatype : "json",
+			success : function() {
+				//保存成功后再这里面做页面跳转
+				alert("success");
+				
+			},
+			error : function() {
+				alert("失败");
+			}
+		});
 	}
 </script>
 <!--  -->
@@ -215,7 +279,7 @@
 						<div class="tab-pane active in" id="home">
 							<s:form action="/addProduct" method="post">
 								<div class="btn-toolbar">
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-primary" onclick="savetable()">
 										<i class="icon-save"></i> Save
 									</button>
 									<a href="productlist" class="btn">Cancel</a>
@@ -229,15 +293,15 @@
 								<td>Date Created:</td>
 								</tr>
 								<tr>
-								<td><input type="text" /></td>
-								<td><input type="text" /></td>
-								<td><input type="datetime" /></td>
+								<td><input type="text" name="pname"/></td>
+								<td><input type="text" name="pcode"/></td>
+								<td><input type="datetime" name="pdate"/></td>
 								</tr>
 								<tr >
 								<td colspan="3">Other Information:</td>
 								</tr>
 								<tr >
-								<td colspan="3"><input type="text" /></td>
+								<td colspan="3"><textarea cols="60" rows="6" name="pinfo"></textarea></td>
 								</tr>
 								</table>
 								<div id="addtrdiv"
@@ -245,7 +309,7 @@
 									<button type="button" class="btn btn-xs btn-link"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
-								<table class="table  table-bordered" id="para_table">
+								<table class="table  table-bordered" id="para_table" onchange="totalTable()">
 									<tr>
 										<th style="text-align:center" width="80">positon</th>
 										<th style="text-align:center" width="80">chem ID</th>
@@ -256,11 +320,11 @@
 										<th style="text-align:center" width="100">Operation</th>
 									</tr>
 									<tr>
+										<td style="text-align:center; " onclick="">1</td>
+										<td style="text-align:center; " onclick=""><select onchange="chemselected(this)" class='chemlist'></select></td>
 										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick=""><select onchange="chemselected(this)" class='chemlist' ></select></td>
 										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick="tdclick(this)"></td>
+										<td style="text-align:center; " onclick="tdclick(this)" onchange="tdchange(this)">0</td>
 										<td style="text-align:center; " onclick=""></td>
 										<td style="text-align:center; " >
 											<button type="button" class="btn btn-xs btn-link" onclick="deletetr(this)"><i class="icon-remove"></i> Delete</button>
@@ -269,12 +333,10 @@
 								</table>
 
 								<div id="addtrdiv"
-									style="margin-top:-15px; width: 15%; float: right;">
+									style="margin-top:-15px; width: 15%; float: right;"><label>Total %:</label>0<label>Total Amount:</label>0.00
 									<button type="button" class="btn btn-xs btn-link"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
-								
-
 							</s:form>
 						</div>
 					</div>

@@ -1,6 +1,7 @@
 package au.com.phytoline.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import au.com.phytoline.entity.Chemical;
 import au.com.phytoline.entity.Pager;
 import au.com.phytoline.entity.Product;
+import au.com.phytoline.entity.ProductDetails;
 import au.com.phytoline.service.ChemicalService;
 import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
@@ -31,9 +33,20 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	ChemicalService chemicalService;
 	Pager pager;
 	Product product;
+	ProductDetails productDetails;
 	List chemList;
 	String result;
 
+	
+	public HttpServletRequest getServletRequest() {
+		return servletRequest;
+	}
+	public void setProductDetails(ProductDetails productDetails) {
+		this.productDetails = productDetails;
+	}
+	public ProductDetails getProductDetails() {
+		return productDetails;
+	}
 	public void setResult(String result) {
 		this.result = result;
 	}
@@ -123,8 +136,31 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		request.put("chemList", chemList);
 		return "addProduct";
 	}
+
 	public String doAddProduct(){
-		
+		//设置proudct
+		Product product= new Product();
+		product.setPname(servletRequest.getParameter("pname"));
+		product.setPcode(servletRequest.getParameter("pcode"));
+		//product.setPdate(new Date(servletRequest.getParameter("pdate")));
+		product.setPinfo(servletRequest.getParameter("pinfo"));
+
+		//
+		String json = servletRequest.getParameter("pdata");
+		JSONArray test = JSONArray.fromObject(json);//将获取的关于details的内容转化为json对象
+		for(int i=1;i<test.size();i++){
+			//因为这段json的第一个对象，是table的th头，是空值，所以从第二个对象开始取值
+			JSONObject dt = JSONObject.fromObject(test.get(i));
+			ProductDetails productDetails = new ProductDetails();
+			productDetails.setPosition(Integer.parseInt((String) dt.get("position")));
+			productDetails.setChemId((String) dt.get("chemId"));
+			productDetails.setChemName((String) dt.get("chemName"));
+			productDetails.setChemPrice(Double.parseDouble((String) dt.get("chemPrice")));
+			productDetails.setPercent(Double.parseDouble((String) dt.get("percent")));
+			productDetails.setAmount(Double.parseDouble((String) dt.get("amount")));
+			//将该数据保存到productdetails表中
+			
+		}
 		return "productlist";
 	}
 	
@@ -153,7 +189,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		// 接收页面过来的传值，查询后返回页面
 
 		String cid = servletRequest.getParameter("cid");
-		System.out.println(cid);
+		//System.out.println(cid);
 		Chemical chemical = chemicalService.getChemicalById(Integer.parseInt(cid));
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("cid", chemical.getCid());
