@@ -14,4 +14,8 @@ public interface ProductService {
 	public Product findProductById(int id);
 	
 	public List getAllProduct();
+	
+	public void saveProduct(Product product);
+	
+	public Integer getProductIdByNameAndCode(String name,String code);
 }

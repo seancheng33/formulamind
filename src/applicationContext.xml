@@ -93,9 +93,9 @@
 
 
 	<!-- production -->
-	<bean id="productDAO" class="au.com.phytoline.dao.impl.ProductDAOImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+<bean id="productDAO" class="au.com.phytoline.dao.impl.ProductDAOImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
 	<bean id="productDetailsDAO" class="au.com.phytoline.dao.impl.ProductDetailsDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

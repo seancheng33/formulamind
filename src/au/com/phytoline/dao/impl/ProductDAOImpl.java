@@ -5,7 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import au.com.phytoline.dao.ProductDAO;
 import au.com.phytoline.entity.Product;
@@ -49,4 +51,31 @@ public class ProductDAOImpl implements ProductDAO {
 		return c.list();
 	}
 
+	@Override
+	public void saveProduct(Product product) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(product);
+		
+	}
+
+	@Override
+	public Integer getProductIdByNameAndCode(String name, String code) {
+		List list = null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Product.class);
+//		Product product =new Product();
+//		product.setPname(name);
+//		product.setPcode(code);
+//		Example example = Example.create(product);
+//		c.add(example);
+		
+		c.add(Restrictions.eq("pname", name));
+		c.add(Restrictions.eq("pcode", code));
+		
+		list = c.list();
+		Product product2 = (Product) list.get(0);
+		int id = product2.getPid();
+		return id;
+	}
+ 
 }

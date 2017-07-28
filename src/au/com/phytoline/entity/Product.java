@@ -18,7 +18,6 @@ public class Product implements java.io.Serializable {
 	private Date pdate;
 	private String pinfo;
 	private Set batchs = new HashSet(0);
-	private Set productDetailses = new HashSet(0);
 
 	// Constructors
 
@@ -27,14 +26,12 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(String pname, String pcode, Date pdate, String pinfo,
-			Set batchs, Set productDetailses) {
+	public Product(String pname, String pcode, Date pdate, String pinfo, Set batchs) {
 		this.pname = pname;
 		this.pcode = pcode;
 		this.pdate = pdate;
 		this.pinfo = pinfo;
 		this.batchs = batchs;
-		this.productDetailses = productDetailses;
 	}
 
 	// Property accessors
@@ -85,14 +82,6 @@ public class Product implements java.io.Serializable {
 
 	public void setBatchs(Set batchs) {
 		this.batchs = batchs;
-	}
-
-	public Set getProductDetailses() {
-		return this.productDetailses;
-	}
-
-	public void setProductDetailses(Set productDetailses) {
-		this.productDetailses = productDetailses;
 	}
 
 }

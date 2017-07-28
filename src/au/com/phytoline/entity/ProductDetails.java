@@ -9,10 +9,11 @@ public class ProductDetails implements java.io.Serializable {
 	// Fields
 
 	private Integer pdid;
-	private Product product;
 	private String pcode;
+	private String pname;
+	private Integer pId;
 	private Integer position;
-	private String chemId;
+	private Integer chemId;
 	private String chemName;
 	private Double chemPrice;
 	private Double percent;
@@ -25,10 +26,10 @@ public class ProductDetails implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProductDetails(Product product, String pcode, Integer position,String chemId,
-			String chemName, Double chemPrice, Double percent, Double amount) {
-		this.product = product;
-		this.pcode = pcode;
+	public ProductDetails(Integer pId, Integer position, Integer chemId, String chemName,
+			Double chemPrice, Double percent, Double amount) {
+		//this.pcode = pcode;
+		this.pId = pId;
 		this.position = position;
 		this.chemId = chemId;
 		this.chemName = chemName;
@@ -39,14 +40,6 @@ public class ProductDetails implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getChemId() {
-		return chemId;
-	}
-
-	public void setChemId(String chemId) {
-		this.chemId = chemId;
-	}
-
 	public Integer getPdid() {
 		return this.pdid;
 	}
@@ -55,21 +48,29 @@ public class ProductDetails implements java.io.Serializable {
 		this.pdid = pdid;
 	}
 
-	public Product getProduct() {
-		return this.product;
+	public Integer getpId() {
+		return pId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setpId(Integer pId) {
+		this.pId = pId;
 	}
-
-	public String getPcode() {
-		return this.pcode;
-	}
-
-	public void setPcode(String pcode) {
-		this.pcode = pcode;
-	}
+	
+//	public String getPcode() {
+//		return this.pcode;
+//	}
+//
+//	public void setPcode(String pcode) {
+//		this.pcode = pcode;
+//	}
+//
+//	public String getPname() {
+//		return this.pname;
+//	}
+//
+//	public void setPname(String pname) {
+//		this.pname = pname;
+//	}
 
 	public Integer getPosition() {
 		return this.position;
@@ -77,6 +78,14 @@ public class ProductDetails implements java.io.Serializable {
 
 	public void setPosition(Integer position) {
 		this.position = position;
+	}
+
+	public Integer getChemId() {
+		return this.chemId;
+	}
+
+	public void setChemId(Integer chemId) {
+		this.chemId = chemId;
 	}
 
 	public String getChemName() {

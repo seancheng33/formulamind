@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.RequestAware;
@@ -139,27 +140,38 @@ public class ProductAction extends ActionSupport implements RequestAware,
 
 	public String doAddProduct(){
 		//设置proudct
+		String pname =servletRequest.getParameter("pname");
+		String pcode = servletRequest.getParameter("pcode");
+		//Date date = new Date(servletRequest.getParameter("pdate"));
+		String pinfo = servletRequest.getParameter("pinfo");
+				
 		Product product= new Product();
-		product.setPname(servletRequest.getParameter("pname"));
-		product.setPcode(servletRequest.getParameter("pcode"));
-		//product.setPdate(new Date(servletRequest.getParameter("pdate")));
-		product.setPinfo(servletRequest.getParameter("pinfo"));
-
+		product.setPname(pname);
+		product.setPcode(pcode);
+		//product.setPdate(date);
+		product.setPinfo(pinfo);
+		//以上数据保存到product表中
+		productService.saveProduct(product);
+		
+		//获取刚存进去的那条数据的PID
+		int pId = productService.getProductIdByNameAndCode(pname,pcode);
+		System.out.println(pId);
 		//
 		String json = servletRequest.getParameter("pdata");
-		JSONArray test = JSONArray.fromObject(json);//将获取的关于details的内容转化为json对象
-		for(int i=1;i<test.size();i++){
+		JSONArray detailsList = JSONArray.fromObject(json);//将获取的关于details的内容转化为json对象
+		for(int i=1;i<detailsList.size();i++){
 			//因为这段json的第一个对象，是table的th头，是空值，所以从第二个对象开始取值
-			JSONObject dt = JSONObject.fromObject(test.get(i));
+			JSONObject dt = JSONObject.fromObject(detailsList.get(i));
 			ProductDetails productDetails = new ProductDetails();
+			productDetails.setpId(pId);
 			productDetails.setPosition(Integer.parseInt((String) dt.get("position")));
-			productDetails.setChemId((String) dt.get("chemId"));
+			productDetails.setChemId(Integer.parseInt((String) dt.get("chemId")));
 			productDetails.setChemName((String) dt.get("chemName"));
 			productDetails.setChemPrice(Double.parseDouble((String) dt.get("chemPrice")));
 			productDetails.setPercent(Double.parseDouble((String) dt.get("percent")));
 			productDetails.setAmount(Double.parseDouble((String) dt.get("amount")));
 			//将该数据保存到productdetails表中
-			
+			productDetailsService.saveProductDetails(productDetails);
 		}
 		return "productlist";
 	}

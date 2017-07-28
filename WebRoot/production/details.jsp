@@ -94,9 +94,9 @@
 							<s:iterator id="details" value="#request.productDetailses">
 							<tr>
 								<td>${details.position}</td>
-								<td>${details.chemical.cid}</td>
-								<td>${details.chemical.cname}</td>
-								<td>${details.chemical.price}</td>
+								<td>${details.chemId}</td>
+								<td>${details.chemName}</td>
+								<td>${details.chemPrice}</td>
 								<td>${details.percent}</td>
 								<td>${details.amount}</td>
 							</tr>

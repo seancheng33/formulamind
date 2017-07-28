@@ -21,8 +21,14 @@ public class ProductDetailsDAOImpl implements ProductDetailsDAO {
 	public List getDetailsByProductId(int pid) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(ProductDetails.class);
-		c.add(Restrictions.eq("product.pid", pid));
+		c.add(Restrictions.eq("pId", pid));
 		return c.list();
+	}
+
+	@Override
+	public void saveProductDetails(ProductDetails productDetails) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(productDetails);
 	}
 
 }

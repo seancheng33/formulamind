@@ -3,6 +3,7 @@ package au.com.phytoline.service.impl;
 import java.util.List;
 
 import au.com.phytoline.dao.ProductDetailsDAO;
+import au.com.phytoline.entity.ProductDetails;
 import au.com.phytoline.service.ProductDetailsService;
 
 public class ProductDetailsServiceImpl implements ProductDetailsService {
@@ -14,6 +15,10 @@ public void setProductDetailsDAO(ProductDetailsDAO productDetailsDAO) {
 	public List getDetailsByProductId(int pid) {
 
 		return productDetailsDAO.getDetailsByProductId(pid);
+	}
+	@Override
+	public void saveProductDetails(ProductDetails productDetails) {
+		productDetailsDAO.saveProductDetails(productDetails);
 	}
 
 }
