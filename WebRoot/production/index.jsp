@@ -59,8 +59,8 @@
 	<div class="span9">
 		<h1 class="page-title">Product Manager</h1>
 		<div class="well search-well">
-			<form class="form-inline" method="post" action="supplierlist">
-				<s:textfield label="Search supplier name" name="nameSearch" />
+			<form class="form-inline" method="post" action="productlist">
+				<s:textfield label="Search product by name" name="nameSearch" />
 				<button class="btn" type="submit">
 					<i class="icon-search"></i> Go
 				</button>
@@ -96,9 +96,9 @@
 							<td>${product.pdate}</td>
 							<td>${product.pinfo}</td>
 							<td><a href="productDetails?pid=${product.pid}" title="Show detail"><i class="icon-file"></i>
-							</a> <a href="toSupplierModify?pid=${product.pid}" title="Edit"><i
+							</a> <a href="toProductModify?pid=${product.pid}" title="Edit"><i
 									class="icon-pencil"></i> </a> <a
-								href="deleteSupplier?pid=${product.pid}" data-toggle="modal"
+								href="deleteProduct?pid=${product.pid}" data-toggle="modal"
 								title="Remove"><i class="icon-trash"></i> </a></td>
 						</tr>
 					</s:iterator>

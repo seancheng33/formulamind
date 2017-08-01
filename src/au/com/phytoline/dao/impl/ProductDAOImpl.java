@@ -63,11 +63,6 @@ public class ProductDAOImpl implements ProductDAO {
 		List list = null;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(Product.class);
-//		Product product =new Product();
-//		product.setPname(name);
-//		product.setPcode(code);
-//		Example example = Example.create(product);
-//		c.add(example);
 		
 		c.add(Restrictions.eq("pname", name));
 		c.add(Restrictions.eq("pcode", code));
@@ -77,5 +72,10 @@ public class ProductDAOImpl implements ProductDAO {
 		int id = product2.getPid();
 		return id;
 	}
- 
+
+	@Override
+	public void deleteProduct(Product product) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(product);
+	}
 }

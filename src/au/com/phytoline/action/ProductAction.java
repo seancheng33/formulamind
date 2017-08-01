@@ -107,8 +107,12 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
 	}
-
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		this.servletRequest = arg0;
+	}
 	
+	//
 	public String productList(){
 		int curPage = 1;
 		if (pager != null) {
@@ -197,6 +201,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 
 		return "ajaxChem";
 	}
+	
 	public String ajaxChemDetail() {
 		// 接收页面过来的传值，查询后返回页面
 
@@ -208,15 +213,24 @@ public class ProductAction extends ActionSupport implements RequestAware,
 			map.put("cname", chemical.getCname());
 			map.put("price", chemical.getPrice());
 		JSONObject json = JSONObject.fromObject(map);
-		//JSONArray json = JSONArray.fromObject(map);
 		result = json.toString();
 
 		return "ajaxChemDetail";
 	}
-	@Override
-	public void setServletRequest(HttpServletRequest arg0) {
-		// TODO Auto-generated method stub
-		this.servletRequest = arg0;
+	
+	public String deleteProduct(){
+		
+		Product product=productService.findProductById(pid);
+		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		
+		for(int i=0;i<productDetailses.size();i++){
+			ProductDetails details = new ProductDetails();
+			details=(ProductDetails) productDetailses.get(i);
+			productDetailsService.deleteProductDetails(details);
+		}
+		productService.deleteProduct(product);
+		
+		return "productlist";
 	}
 
 }
