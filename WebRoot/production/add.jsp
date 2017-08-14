@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Supplier</title>
+<title>Add Product</title>
 <link rel="stylesheet" type="text/css"
 	href="lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
@@ -42,39 +42,39 @@ var tmpprecent;
 // 		var tableinfo = gettableinfo();
 // 		alert(tableinfo);
 // 	}
-	//get table infomation  
-	function gettableinfo() {
-		var key = "";
-		var value = "";
-		var tabledata = "";
-		var table = $("#para_table");
-		var tbody = table.children();
-		var trs = tbody.children();
-		for (var i = 1; i < trs.length; i++) {
-			var tds = trs.eq(i).children();
-			for (var j = 0; j < tds.length; j++) {
-				if (j == 0) {
-					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
-						return null;
-					}
-					key = "key\":\"" + tds.eq(j).text();
-				}
-				if (j == 1) {
-					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
-						return null;
-					}
-					value = "value\":\"" + tds.eq(j).text();
-				}
-			}
-			if (i == trs.length - 1) {
-				tabledata += "{\"" + key + "\",\"" + value + "\"}";
-			} else {
-				tabledata += "{\"" + key + "\",\"" + value + "\"},";
-			}
-		}
-		tabledata = "[" + tabledata + "]";
-		return tabledata;
-	}
+// 	//get table infomation  
+// 	function gettableinfo() {
+// 		var key = "";
+// 		var value = "";
+// 		var tabledata = "";
+// 		var table = $("#para_table");
+// 		var tbody = table.children();
+// 		var trs = tbody.children();
+// 		for (var i = 1; i < trs.length; i++) {
+// 			var tds = trs.eq(i).children();
+// 			for (var j = 0; j < tds.length; j++) {
+// 				if (j == 0) {
+// 					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
+// 						return null;
+// 					}
+// 					key = "key\":\"" + tds.eq(j).text();
+// 				}
+// 				if (j == 1) {
+// 					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
+// 						return null;
+// 					}
+// 					value = "value\":\"" + tds.eq(j).text();
+// 				}
+// 			}
+// 			if (i == trs.length - 1) {
+// 				tabledata += "{\"" + key + "\",\"" + value + "\"}";
+// 			} else {
+// 				tabledata += "{\"" + key + "\",\"" + value + "\"},";
+// 			}
+// 		}
+// 		tabledata = "[" + tabledata + "]";
+// 		return tabledata;
+// 	}
 
 	function tdclick(tdobject) {
 		var td = $(tdobject);
@@ -115,7 +115,7 @@ var tmpprecent;
 		tmpprecent = input.val("").focus().val(t);//赋值给一个全局变量，方便后面计算amount
 		//6,清除点击事件  
 		td.unbind("click");
-
+		
 	}
 
 	function loadchem(tdobject) {
@@ -174,21 +174,11 @@ var tmpprecent;
 			var percentvalue = tmpprecent.val();
 			var pricevalue = $(tdobject).parent("tr").find("td:eq(3)").text();
 			$(tdobject).parent("tr").find("td:eq(5)").html(percentvalue*pricevalue/100);
-			totalTable();
+			
 			}
 	function totalTable(){
-		var table = $("#para_table");
-		var totalP = 0 ;
-		var tbody = table.children();
-		var trs = tbody.children();
-		//alert(trs.lenght);
-		for (var i = 1; i < trs.length; i++) {
-			var tds = trs.eq(i).children();
-			var tmpValue = parseInt(tds.eq(4).text());
-			totalP = totalP +tmpValue;
-		}
-		alert(totalP);
-		$("#tper").innerHTML =  totalP;
+		
+		
 	}
 	function addtr() {
 		rowsnum +=1;
@@ -242,7 +232,6 @@ var tmpprecent;
 			success : function() {
 				//保存成功后再这里面做页面跳转
 				alert("success");
-				//window.location.href='productlist';
 				
 			},
 			error : function() {
@@ -320,7 +309,7 @@ var tmpprecent;
 									<button type="button" class="btn btn-xs btn-link"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
-								<table class="table  table-bordered" id="para_table">
+								<table class="table  table-bordered" id="para_table" onchange="totalTable()">
 									<tr>
 										<th style="text-align:center" width="80">positon</th>
 										<th style="text-align:center" width="80">chem ID</th>
@@ -344,7 +333,7 @@ var tmpprecent;
 								</table>
 
 								<div id="addtrdiv"
-									style="margin-top:-15px; width: 15%; float: right;"><label>Total %:</label><div id="tper">0.00</div><label>Total Amount:</label>0.00
+									style="margin-top:-15px; width: 15%; float: right;"><label>Total %:</label>0<label>Total Amount:</label>0.00
 									<button type="button" class="btn btn-xs btn-link"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
