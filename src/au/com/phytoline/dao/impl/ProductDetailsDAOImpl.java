@@ -31,10 +31,4 @@ public class ProductDetailsDAOImpl implements ProductDetailsDAO {
 		session.save(productDetails);
 	}
 
-	@Override
-	public void deleteProductDetails(ProductDetails productDetails) {
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(productDetails);
-	}
-
 }

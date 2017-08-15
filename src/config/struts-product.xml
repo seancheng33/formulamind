@@ -19,9 +19,6 @@
 		<action name="doAddProduct" class="productAction" method="doAddProduct">
 			<result name="productlist" type="json">productlist</result>
 		</action>
-		<action name="deleteProduct" class="productAction" method="deleteProduct">
-			<result name="productlist" type="redirectAction">productlist</result>
-		</action>
 		<action name="ajaxChem" class="productAction" method="ajaxChem">
 			<result name="ajaxChem" type="json">
 				<param name="root">result</param>

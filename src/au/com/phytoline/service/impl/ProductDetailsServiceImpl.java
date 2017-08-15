@@ -20,9 +20,5 @@ public void setProductDetailsDAO(ProductDetailsDAO productDetailsDAO) {
 	public void saveProductDetails(ProductDetails productDetails) {
 		productDetailsDAO.saveProductDetails(productDetails);
 	}
-	@Override
-	public void deleteProductDetails(ProductDetails productDetails) {
-		productDetailsDAO.deleteProductDetails(productDetails);		
-	}
 
 }

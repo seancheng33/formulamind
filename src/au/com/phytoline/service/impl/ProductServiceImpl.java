@@ -48,9 +48,4 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.getProductIdByNameAndCode(name, code);
 	}
 
-	@Override
-	public void deleteProduct(Product product) {
-		productDAO.deleteProduct(product);
-	}
-
 }
