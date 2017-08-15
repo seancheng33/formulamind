@@ -18,4 +18,6 @@ public interface ProductService {
 	public void saveProduct(Product product);
 	
 	public Integer getProductIdByNameAndCode(String name,String code);
+	
+	public void deleteProduct(Product product);
 }

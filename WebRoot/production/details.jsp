@@ -62,7 +62,7 @@
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane active in" id="home">
 						<div class="btn-toolbar">
-							<a href='toSupplierModify?sid=<s:property value="%{#request.supplier.sid}" />' class="btn btn-primary">Edit</a>
+							<a href='toProductionModify?pid=<s:property value="%{#request.product.pid}" />' class="btn btn-primary">Edit</a>
 							<a href="productlist" class="btn">Product List</a>
 							<div class="btn-group"></div>
 							<hr>

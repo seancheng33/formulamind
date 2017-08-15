@@ -11,4 +11,5 @@ public interface ProductDAO {
 	public List getAllProduct();
 	public void saveProduct(Product product);
 	public Integer getProductIdByNameAndCode(String name,String code);
+	public void deleteProduct(Product product);
 }

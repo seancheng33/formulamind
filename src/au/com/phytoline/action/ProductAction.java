@@ -64,7 +64,6 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		return product;
 	}
 
-
 	public void setProduct(Product product) {
 		this.product = product;
 	}
@@ -107,8 +106,12 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
 	}
-
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		this.servletRequest = arg0;
+	}
 	
+	//
 	public String productList(){
 		int curPage = 1;
 		if (pager != null) {
@@ -148,14 +151,14 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		Product product= new Product();
 		product.setPname(pname);
 		product.setPcode(pcode);
-		//product.setPdate(date);
+		product.setPdate(new Date());
 		product.setPinfo(pinfo);
 		//以上数据保存到product表中
 		productService.saveProduct(product);
 		
 		//获取刚存进去的那条数据的PID
 		int pId = productService.getProductIdByNameAndCode(pname,pcode);
-		System.out.println(pId);
+		//System.out.println(pId);
 		//
 		String json = servletRequest.getParameter("pdata");
 		JSONArray detailsList = JSONArray.fromObject(json);//将获取的关于details的内容转化为json对象
@@ -197,6 +200,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 
 		return "ajaxChem";
 	}
+	
 	public String ajaxChemDetail() {
 		// 接收页面过来的传值，查询后返回页面
 
@@ -208,15 +212,25 @@ public class ProductAction extends ActionSupport implements RequestAware,
 			map.put("cname", chemical.getCname());
 			map.put("price", chemical.getPrice());
 		JSONObject json = JSONObject.fromObject(map);
-		//JSONArray json = JSONArray.fromObject(map);
 		result = json.toString();
 
 		return "ajaxChemDetail";
 	}
-	@Override
-	public void setServletRequest(HttpServletRequest arg0) {
-		// TODO Auto-generated method stub
-		this.servletRequest = arg0;
+	
+	public String deleteProduct(){
+		//根据pid查询出product对象，再根据product对象的pid查询出该product关联的details的list
+		Product product=productService.findProductById(pid);
+		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		//遍历details的list，将其删除
+		for(int i=0;i<productDetailses.size();i++){
+			ProductDetails details = new ProductDetails();
+			details=(ProductDetails) productDetailses.get(i);
+			productDetailsService.deleteProductDetails(details);
+		}
+		//删除了dteails的list的数据后，在将该product删除
+		productService.deleteProduct(product);
+		//这层product的删除，是不是应该有一个回滚机制，因为涉及到多张表的内容删除，内容待优化
+		return "productlist";
 	}
 
 }
