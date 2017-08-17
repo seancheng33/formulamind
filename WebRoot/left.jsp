@@ -18,7 +18,7 @@
 			<i class="icon-briefcase"></i>Account<span class="label label-info">+10</span>
 		</div>
 		<ul id="accounts-menu" class="nav nav-list collapse in">
-			<li><a href="login.jsp">Sign In</a></li>
+			<li><a href="sign-in.jsp">Sign In</a></li>
 			<li><a href="logout.jsp">Sign Up</a></li>
 			<li><a href="reset-password.jsp">Reset Password</a></li>
 		</ul>

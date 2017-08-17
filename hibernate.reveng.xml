@@ -27,7 +27,12 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="batch_details" catalog="formula_mind">
+	<table name="batch_details" catalog="formula_mind">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="user" catalog="formula_mind">
 	<primary-key>
 		<generator class="native"></generator>
 	</primary-key>

@@ -37,7 +37,7 @@
 				<value>au/com/phytoline/entity/Supplier.hbm.xml</value>
 				<value>au/com/phytoline/entity/Product.hbm.xml</value>
 				<value>au/com/phytoline/entity/Batch.hbm.xml</value>
-			</list>
+				<value>au/com/phytoline/entity/User.hbm.xml</value></list>
 		</property>
 	</bean>
 
@@ -131,7 +131,16 @@
 		<property name="productDetailsService" ref="productDetailsService" />
 		<property name="batchDetailsService" ref="batchDetailsService"></property>
 	</bean>
-	<!-- -->
-
+	
+	<!-- user -->
+	<bean id="userDAO" class="au.com.phytoline.dao.impl.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userService" class="au.com.phytoline.service.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="userAction" class="au.com.phytoline.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
 	<!-- -->
 </beans> 

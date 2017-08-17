@@ -94,7 +94,7 @@ function checkFormat(){
 						<s:select label="Product Name" name="pid" list="#request.productList" listKey="pid" listValue="pname" />
 						<s:textfield label="Batch No" name="batch.batchCode" />
 						<s:textfield label="Total Quantity" name="batch.batchQuantity" value="0" />
-						<s:textfield label="Operator" name="batch.operatorName" />
+						<s:textfield label="Operator" name="batch.operatorName" value="%{#session.LoginUser.uname}"/>
 						<sx:datetimepicker label="Batch Date" name="batch.batchDate" displayFormat="yyyy-MM-dd" value="%{'today'}"/>
 						<s:textarea label="Other Information" name="batch.binfo" />
 					</s:form>

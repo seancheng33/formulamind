@@ -5,12 +5,25 @@
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 
 	<package name="formulamind" extends="struts-default" namespace="/">
-
+<!-- 		<interceptors> -->
+<!-- 			<interceptor-stack name="loginStack"> -->
+<!-- 				<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 				<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
+<!-- 			</interceptor-stack> -->
+<!-- 			<interceptor name="loginInterceptor" -->
+<!-- 				class="au.com.phytoline.interceptor.LoginInterceptor"> -->
+<!-- 			</interceptor> -->
+<!-- 		</interceptors> -->
+<!-- 		<default-interceptor-ref name="loginStack"></default-interceptor-ref> -->
+<!-- 		<global-results> -->
+<!-- 			<result name="login">/*</result> -->
+<!-- 			<result name="error">sign-in.jsp</result> -->
+<!-- 		</global-results> -->
 	</package>
-	
-	<include file="config/struts-supplier.xml" ></include>
-	<include file="config/struts-chemical.xml" ></include>
-	<include file="config/struts-product.xml" ></include>
-	<include file="config/struts-batch.xml" ></include>
 
+	<include file="config/struts-supplier.xml"></include>
+	<include file="config/struts-chemical.xml"></include>
+	<include file="config/struts-product.xml"></include>
+	<include file="config/struts-batch.xml"></include>
+	<include file="config/struts-user.xml"></include>
 </struts>    

@@ -1,7 +1,7 @@
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%><!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8">
     <title>Formula and Production Managemnet</title>
@@ -68,9 +68,9 @@
 <script type="text/javascript" charset="utf-8" src="javascripts/graphDemo.js"></script>
 
 <div class="stats">
-    <p class="stat"><span class="number">53</span>tickets</p>
-    <p class="stat"><span class="number">27</span>tasks</p>
-    <p class="stat"><span class="number">15</span>waiting</p>
+    <p class="stat"><span class="number">53</span>Production</p>
+    <p class="stat"><span class="number">27</span>Total Batch</p>
+    <p class="stat"><span class="number">15</span>Today New Batch</p>
 </div>
 <h1 class="page-title">Dashboard</h1>
 
@@ -214,9 +214,6 @@
 
         </div>
     </div>
-    
-
-    
     <footer>
 <jsp:include page="footer.jsp" />
     </footer>

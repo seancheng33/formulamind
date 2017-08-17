@@ -1,3 +1,18 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50635
+Source Host           : localhost:3306
+Source Database       : formula_mind
+
+Target Server Type    : MYSQL
+Target Server Version : 50635
+File Encoding         : 65001
+
+Date: 2017-08-17 11:14:33
+*/
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -94,4 +109,15 @@ CREATE TABLE `supplier` (
   `screatedate` date DEFAULT NULL,
   `smodifydate` date DEFAULT NULL,
   PRIMARY KEY (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `uname` varchar(20) DEFAULT NULL,
+  `upassword` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
