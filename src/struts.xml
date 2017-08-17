@@ -16,7 +16,6 @@
 <!-- 		</interceptors> -->
 <!-- 		<default-interceptor-ref name="loginStack"></default-interceptor-ref> -->
 <!-- 		<global-results> -->
-<!-- 			<result name="login">/*</result> -->
 <!-- 			<result name="error">sign-in.jsp</result> -->
 <!-- 		</global-results> -->
 	</package>
