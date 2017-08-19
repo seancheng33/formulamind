@@ -5,7 +5,7 @@
 	<package name="product" extends="formulamind,json-default"
 		namespace="/">
 		<action name="productlist" class="productAction" method="productList">
-			<result name="productlist">production/index.jsp</result>
+			<result name="productlist">production/list.jsp</result>
 		</action>
 		<action name="productDetails" class="productAction" method="productDetails">
 			<result name="productDetails">production/details.jsp</result>

@@ -4,7 +4,7 @@
 <!-- supplier的action包 -->
 	<package name="supplier" extends="formulamind" namespace="/">
 		<action name="supplierlist" class="supplierAction" method="supplierList">
-			<result name="supplierlist">supplier/index.jsp</result>
+			<result name="supplierlist">supplier/list.jsp</result>
 		</action>
 		<action name="toaddSupplier" class="supplierAction" method="toAddSupplier">
 			<result name="supplier_add">supplier/add.jsp</result>

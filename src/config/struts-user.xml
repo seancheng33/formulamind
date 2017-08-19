@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<!-- user的action包 -->
+	<!-- user的action包 -->
 	<package name="user" extends="formulamind" namespace="/">
+		<default-interceptor-ref name="defaultStack" />
 		<action name="checkLogin" class="userAction" method="checkLogin">
 			<result name="login">index.jsp</result>
+			<result name="retry">sign-in.jsp</result>
 		</action>
 		<action name="logOut" class="userAction" method="logOut">
 			<result name="logout">sign-in.jsp</result>

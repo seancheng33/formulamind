@@ -72,11 +72,11 @@
                     <s:password label="Password" name="user.upassword"></s:password>
                     <button type="submit" class="btn btn-primary"> <i class="icon-save"></i>
 						Sign In
-					</button>
+					</button><p style="color: red;">${requestScope.LoginTip}</p>
                 </s:form>
             </div>
         </div>
-        <p class="pull-right" style=""><a href="#" target="blank">Theme by Portnine</a></p>
+        <p class="pull-right" style=""><a href="#" target="blank">Program by Sean Cheng</a></p>
         
         <p><a href="reset-password.html">Forgot your password?</a></p>
     </div>

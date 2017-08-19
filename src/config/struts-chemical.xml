@@ -5,7 +5,7 @@
 	<package name="chemical" extends="formulamind,json-default"
 		namespace="/">
 		<action name="chemicallist" class="chemicalAction" method="chemicalList">
-			<result name="chemicallist">chemical/index.jsp</result>
+			<result name="chemicallist">chemical/list.jsp</result>
 		</action>
 		<action name="toAddChemical" class="chemicalAction" method="toAddChemical">
 			<result name="chemical_add">chemical/add.jsp</result>
