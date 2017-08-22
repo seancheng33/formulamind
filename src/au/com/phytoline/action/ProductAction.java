@@ -179,6 +179,42 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		return "productlist";
 	}
 	
+	public String toProductModify(){
+		Product product = productService.findProductById(pid);
+		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		chemList = chemicalService.getAllChemicalByPage(0, 100);
+		request.put("product", product);
+		request.put("productDetailses", productDetailses);
+		request.put("chemList", chemList);
+		return "updateProduct";
+	}
+	
+	public String doProductModify(){
+		String pname =servletRequest.getParameter("pname");
+		String pcode = servletRequest.getParameter("pcode");
+		//Date date = new Date(servletRequest.getParameter("pdate"));
+		String pinfo = servletRequest.getParameter("pinfo");
+				
+		Product product= new Product();
+		product.setPname(pname);
+		product.setPcode(pcode);
+		product.setPdate(new Date());
+		product.setPinfo(pinfo);
+		System.out.println(product);
+		
+		String json = servletRequest.getParameter("pdata");
+		JSONArray detailsList = JSONArray.fromObject(json);//将获取的关于details的内容转化为json对象
+		System.out.println(detailsList.size());
+		return "productlist";
+	}
+	public String ajaxAllDetail(){
+		// 根据pid查询出product和它的details
+		Product product = productService.findProductById(pid);
+		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		// 封装成JSON格式
+		
+		return "ajaxAllDetail";
+	}
 	public String ajaxChem() {
 		// 这里需要查询并传值chemical的全部list给页面，用json的格式
 		chemList = chemicalService.getAllChemicalByPage(0, 100);
@@ -227,10 +263,9 @@ public class ProductAction extends ActionSupport implements RequestAware,
 			details=(ProductDetails) productDetailses.get(i);
 			productDetailsService.deleteProductDetails(details);
 		}
-		//删除了dteails的list的数据后，在将该product删除
+		//删除了details的list的数据后，在将该product删除
 		productService.deleteProduct(product);
 		//这层product的删除，是不是应该有一个回滚机制，因为涉及到多张表的内容删除，内容待优化
 		return "productlist";
 	}
-
 }

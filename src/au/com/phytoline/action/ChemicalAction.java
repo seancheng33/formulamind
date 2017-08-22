@@ -121,7 +121,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		if (pager != null) {
 			curPage = pager.getCurPage();
 		}
-		List chemicalList = null;
+		List<?> chemicalList = null;
 		if (nameSearch == null) {
 			// 无查询条件，获取supplier的列表
 			chemicalList = chemicalService.getAllChemicalByPage(curPage, 10);
@@ -143,7 +143,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		List supplierList = supplierService.getAllSupplier();	
 		
 		Supplier supplier;
-		List<String> supplierDate = new ArrayList();
+		List<String> supplierDate = new ArrayList<String>();
 		
 		for(int i =0;i<supplierList.size();i++){
 			supplier = (Supplier) supplierList.get(i);

@@ -107,16 +107,30 @@ public class SupplierAction extends ActionSupport implements SessionAware,
 
 	public String addSupplier() throws Exception {
 		//先校验各种数据的合法性等
+		//名字不能为空
 		if(supplier.getSname()==null||supplier.getSname().equals("")){
 			this.addFieldError("name", "supplier name can't empyt");
 			return "error";
 		}
+		//邮编必须是XXXX-XXXX
 		String pcode = supplier.getPostcode();
-		
 		if(pcode.length()!=9){
-		this.addFieldError("postcode", "postcode length is 9 and the format is XXXX-XXXX.");
-		return "error";
+			this.addFieldError("postcode", "postcode length is 9 and the format is XXXX-XXXX.");
+			return "error";
 		}
+		//电话号码为8位
+		String pphone = supplier.getPhone();
+		if(pphone.length()<8){
+			this.addFieldError("Phone", "Phone Number length is 8.");
+			return "error";
+		}
+		//传真号码为8位
+		String pfax = supplier.getFax();
+		if(pfax.length()<8){
+			this.addFieldError("Fax", "Fax Number length is 8.");
+			return "error";
+		}
+		
 		//在创建时间中填上当前时间
 		supplier.setScreatedate(new Date());
 		supplierService.addSupplier(supplier);

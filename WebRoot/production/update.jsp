@@ -1,12 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Supplier</title>
+<title>Modify Product</title>
 <link rel="stylesheet" type="text/css"
 	href="lib/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" type="text/css"
-	href="lib/bootstrap/css/bootstrap-responsive.css">
+<!-- <link rel="stylesheet" type="text/css" -->
+<!-- 	href="lib/bootstrap/css/bootstrap-responsive.css"> -->
 <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
 <script src="lib/jquery.min.js" type="text/javascript"></script>
@@ -38,43 +39,6 @@
 <script type="text/javascript">
 var rowsnum = 1;
 var tmpprecent;
-	function save_para_table() {
-		var tableinfo = gettableinfo();
-		alert(tableinfo);
-	}
-	//get table infomation  
-	function gettableinfo() {
-		var key = "";
-		var value = "";
-		var tabledata = "";
-		var table = $("#para_table");
-		var tbody = table.children();
-		var trs = tbody.children();
-		for (var i = 1; i < trs.length; i++) {
-			var tds = trs.eq(i).children();
-			for (var j = 0; j < tds.length; j++) {
-				if (j == 0) {
-					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
-						return null;
-					}
-					key = "key\":\"" + tds.eq(j).text();
-				}
-				if (j == 1) {
-					if (tds.eq(j).text() == null || tds.eq(j).text() == "") {
-						return null;
-					}
-					value = "value\":\"" + tds.eq(j).text();
-				}
-			}
-			if (i == trs.length - 1) {
-				tabledata += "{\"" + key + "\",\"" + value + "\"}";
-			} else {
-				tabledata += "{\"" + key + "\",\"" + value + "\"},";
-			}
-		}
-		tabledata = "[" + tabledata + "]";
-		return tabledata;
-	}
 
 	function tdclick(tdobject) {
 		var td = $(tdobject);
@@ -115,7 +79,6 @@ var tmpprecent;
 		tmpprecent = input.val("").focus().val(t);//赋值给一个全局变量，方便后面计算amount
 		//6,清除点击事件  
 		td.unbind("click");
-		
 	}
 
 	function loadchem(tdobject) {
@@ -173,14 +136,38 @@ var tmpprecent;
 	function tdchange(tdobject) {
 			var percentvalue = tmpprecent.val();
 			var pricevalue = $(tdobject).parent("tr").find("td:eq(3)").text();
-			$(tdobject).parent("tr").find("td:eq(5)").html(percentvalue*pricevalue/100);
-			
+			//先计算值出来，后面显示时规定为小数点后两位
+			var amountvalue = percentvalue*pricevalue/100;
+			$(tdobject).parent("tr").find("td:eq(5)").html(amountvalue.toFixed(2));
 			}
 	function totalTable(){
-		
-		
+		var table = $("#para_table");
+		var totalP = 0 ;
+		var totalA = 0 ;
+		var tbody = table.children();
+		var trs = tbody.children();
+		//未知表的行数，这里遍历每行取值和运算，从第二行开始取值，因为第一行是表头，取值没有意义
+		for (var i = 1; i < trs.length; i++) {
+			var tds = trs.eq(i).children();
+			
+			var tmpValue = parseInt(tds.eq(4).text());
+			var tmpAmount = parseFloat(tds.eq(5).text());
+			//需要一个isNaN的判断,如果转换值是NaN，就是在输入状态，直接取值全局变量的tmpprecent的值
+			if (isNaN(tmpValue)) {
+				totalP += parseInt(tmpprecent.val());
+			} else {
+				totalP += tmpValue;
+			}
+			if (isNaN(tmpAmount)) {
+				totalA = totalA;
+			} else {
+				totalA += tmpAmount;
+			}
+		}
+		$("#tper").html("Total Percent:"+totalP+"  Total Amount:"+totalA.toFixed(2));
 	}
 	function addtr() {
+		totalTable();
 		rowsnum +=1;
 		var table = $("#para_table");
 		var tr = $("<tr>" +
@@ -198,6 +185,7 @@ var tmpprecent;
 	function deletetr(tdobject) {
 		var td = $(tdobject);
 		td.parents("tr").remove();
+		totalTable();
 	}
 	
 	function savetable() {
@@ -219,7 +207,7 @@ var tmpprecent;
 
 		$.ajax({
 			type : "post",
-			url : "doAddProduct",
+			url : "doProductModify",
 			data : {
 			pcode:$("input[name=pcode]").val(),
 			pname:$("input[name=pname]").val(),
@@ -231,11 +219,13 @@ var tmpprecent;
 			datatype : "json",
 			success : function() {
 				//保存成功后再这里面做页面跳转
-				alert("success");
-				
+				alert("Add new product formula success.");
+				//window.location.href='productlist';
+				//保存成功后跳转到productlist页面
+				window.location.replace("productlist");
 			},
 			error : function() {
-				alert("失败");
+				alert("Save the product fail,try again please.");
 			}
 		});
 	}
@@ -277,7 +267,7 @@ var tmpprecent;
 				<div class="well">
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active in" id="home">
-							<s:form action="/addProduct" method="post">
+							<form action="doProductModify" method="post">
 								<div class="btn-toolbar">
 									<button type="submit" class="btn btn-primary" onclick="savetable()">
 										<i class="icon-save"></i> Save
@@ -293,20 +283,21 @@ var tmpprecent;
 								<td>Date Created:</td>
 								</tr>
 								<tr>
-								<td><input type="text" name="pname"/></td>
-								<td><input type="text" name="pcode"/></td>
-								<td><input type="datetime" name="pdate"/></td>
+								<td><input type="text" name="pname" value="${requestScope.product.pname}"/></td>
+								<td><input type="text" name="pcode" value="${requestScope.product.pcode}"/></td>
+								<td><input type="datetime" name="pdate" value="${requestScope.product.pdate}"/>
+								</td>
 								</tr>
 								<tr >
 								<td colspan="3">Other Information:</td>
 								</tr>
 								<tr >
-								<td colspan="3"><textarea cols="60" rows="6" name="pinfo"></textarea></td>
+								<td colspan="3"><textarea cols="60" rows="6" name="pinfo">${requestScope.product.pinfo}</textarea></td>
 								</tr>
 								</table>
 								<div id="addtrdiv"
-									style="margin-top:-15px; width: 15%; float: right;">
-									<button type="button" class="btn btn-xs btn-link"
+									style="margin-top:-15px; width: 25%; float: right;">
+									<button type="button" class="btn btn-xs btn-link" style="float: right;"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
 								<table class="table  table-bordered" id="para_table" onchange="totalTable()">
@@ -319,25 +310,27 @@ var tmpprecent;
 										<th style="text-align:center" width="80">Amount</th>
 										<th style="text-align:center" width="100">Operation</th>
 									</tr>
+									<s:iterator id="details" value="#request.productDetailses">
 									<tr>
-										<td style="text-align:center; " onclick="">1</td>
-										<td style="text-align:center; " onclick=""><select onchange="chemselected(this)" class='chemlist'></select></td>
-										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick=""></td>
-										<td style="text-align:center; " onclick="tdclick(this)" onchange="tdchange(this)">0</td>
-										<td style="text-align:center; " onclick=""></td>
+										<td style="text-align:center; " onclick="">${details.position}</td>
+										<td style="text-align:center; " onclick=""><select onchange="chemselected(this)" class='chemlist'><option>${details.chemId}</option></td>
+										<td style="text-align:center; " onclick="">${details.chemName}</td>
+										<td style="text-align:center; " onclick="">${details.chemPrice}</td>
+										<td style="text-align:center; " onclick="tdclick(this)" onchange="tdchange(this)">${details.percent}</td>
+										<td style="text-align:center; " onclick="">${details.amount}</td>
 										<td style="text-align:center; " >
 											<button type="button" class="btn btn-xs btn-link" onclick="deletetr(this)"><i class="icon-remove"></i> Delete</button>
 										</td>
 									</tr>
+									</s:iterator>
 								</table>
-
+								
 								<div id="addtrdiv"
-									style="margin-top:-15px; width: 15%; float: right;"><label>Total %:</label>0<label>Total Amount:</label>0.00
-									<button type="button" class="btn btn-xs btn-link"
+									style="margin-top:-15px; width: 25%; float: right;"><div id="tper"></div>
+									<button type="button" class="btn btn-xs btn-link" style="float: right;"
 										onclick="addtr()"><i class="icon-plus"></i> Add New Chemical</button>
 								</div>
-							</s:form>
+							</form>
 						</div>
 					</div>
 				</div>

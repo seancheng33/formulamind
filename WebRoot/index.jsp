@@ -72,7 +72,7 @@
     <p class="stat"><span class="number">27</span>Total Batch</p>
     <p class="stat"><span class="number">15</span>Today New Batch</p>
 </div>
-<h1 class="page-title">Dashboard</h1>
+<h1 class="page-title">Home</h1>
 
 <div class="row-fluid">
     <div class="block">
@@ -85,7 +85,7 @@
 
 <div class="row-fluid">
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Users</div>
+        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Production</div>
         <div id="tablewidget" class="block-body collapse in">
             <table class="table">
               <thead>
@@ -128,24 +128,20 @@
                 </tr>
               </tbody>
             </table>
-            <p><a href="users.html">More...</a></p>
+            <p><a href="productlist">More...</a></p>
         </div>
     </div>
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#widget1container">Collapsible </div>
+        <div class="block-heading" data-toggle="collapse" data-target="#widget1container">Supplier </div>
         <div id="widget1container" class="block-body collapse in">
-            <h2>Using Ruby?</h2>
-            <p>This template was developed with <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and includes .erb layouts and views.</p>
-            <p>All of the views you see here (sign in, sign up, users, etc) are already split up so you don't have to waste your time doing it yourself!</p>
-            <p>The layout.erb file includes the header, footer, and side navigation and all of the views are broken out into their own files.</p>
-            <p>If you aren't using Ruby, there is also a set of plain HTML files for each page, just like you would expect.</p>
+            <h2>Supplier</h2>
+
         </div>
     </div>
 </div>
-<div class="copyrights">Collect from <a href="http://www.mycodes.net/" title="后台模板" target="_blank">后台模板</a></div>
 <div class="row-fluid">
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#widget2container">History<span class="label label-warning">+10</span></div>
+        <div class="block-heading" data-toggle="collapse" data-target="#widget2container">History Batch<span class="label label-warning">+10</span></div>
         <div id="widget2container" class="block-body collapse in">
             <table class="table">
               <tbody>

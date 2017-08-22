@@ -11,7 +11,7 @@
 			<li><a href="productlist">Product Manager</a></li>
 			<li><a href="chemicallist">Ingredint Manager</a></li>
 			<li><a href="supplierlist">Set Up Suppliers</a></li>
-			<li><a href="help.html">Search Previons</a></li>
+			<li><a href="help.jsp">Search Previons</a></li>
 		</ul>
 		<div class="nav-header" data-toggle="collapse"
 			data-target="#accounts-menu">
@@ -19,7 +19,7 @@
 		</div>
 		<ul id="accounts-menu" class="nav nav-list collapse in">
 			<li><a href="sign-in.jsp">Sign In</a></li>
-			<li><a href="logout.jsp">Sign Up</a></li>
+			<li><a href="sign-up.jsp">Sign Up</a></li>
 			<li><a href="reset-password.jsp">Reset Password</a></li>
 		</ul>
 

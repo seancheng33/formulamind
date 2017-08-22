@@ -19,6 +19,12 @@
 		<action name="doAddProduct" class="productAction" method="doAddProduct">
 			<result name="productlist" type="json">productlist</result>
 		</action>
+		<action name="toProductModify" class="productAction" method="toProductModify">
+			<result name="updateProduct">production/update.jsp</result>
+		</action>
+		<action name="doProductModify" class="productAction" method="doProductModify">
+			<result name="productlist" type="json">productlist</result>
+		</action>
 		<action name="deleteProduct" class="productAction" method="deleteProduct">
 			<result name="productlist" type="redirectAction">productlist</result>
 		</action>
@@ -29,6 +35,11 @@
 		</action>
 		<action name="ajaxChemDetail" class="productAction" method="ajaxChemDetail">
 			<result name="ajaxChemDetail" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="ajaxAllDetail" class="productAction" method="ajaxAllDetail">
+			<result name="ajaxAllDetail" type="json">
 				<param name="root">result</param>
 			</result>
 		</action>

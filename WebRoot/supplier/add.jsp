@@ -30,7 +30,6 @@
             font-weight: bold;
         }
     </style>
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="javascripts/html5.js"></script>
@@ -62,7 +61,7 @@
 		<div class="well">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane active in" id="home">
-					<s:form action="/addSupplier" method="post">
+					<s:form id="supplierForm" action="/addSupplier" method="post">
 									<div class="btn-toolbar">
 					<button type="submit" class="btn btn-primary"> <i class="icon-save"></i>
 						Save
@@ -71,7 +70,7 @@
 					<hr>
 				</div>
 						<s:fielderror/>
-						<s:textfield label="Supplier Name" name="supplier.sname" />*
+						<s:textfield label="Supplier Name" name="supplier.sname" class="required"/>
 						<s:textfield label="Address" name="supplier.address" />
 						<s:textfield label="Suburb" name="supplier.suburb" />
 						<s:textfield label="Postcode" name="supplier.postcode" />
