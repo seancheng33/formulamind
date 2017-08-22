@@ -30,5 +30,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="ajaxHomeChemicalList" class="chemicalAction"
+			method="ajaxHomeChemicalList">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

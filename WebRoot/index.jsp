@@ -36,7 +36,28 @@
             font-weight: bold;
         }
     </style>
-
+<script type="text/javascript">
+$(
+function loadchem() {
+	$.ajax({
+		type : "get",
+		url : "ajaxHomeChemicalList",
+		dataType : "json",
+		success : function(data) {
+			var d=eval("("+data+")");
+			
+			for (var key in d) { //循环取到各个d 
+				var chem = d[key];
+				$(".chemtable").append("<tr><td>"+chem.id+"</td><td>"+chem.name+"</td><td>"+chem.price+"</td></tr>");
+			}
+			
+		},
+		error : function() {
+			alert("System exception, try again later.")
+		}
+	});
+})
+</script>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="javascripts/html5.js"></script>
@@ -85,47 +106,18 @@
 
 <div class="row-fluid">
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Production</div>
+        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Chemical</div>
         <div id="tablewidget" class="block-body collapse in">
-            <table class="table">
+            <table class="chemtable">
               <thead>
                 <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th width="80">Chem ID</th>
+                  <th width="180">Chemical Name</th>
+                  <th width="50">Price</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Mark</td>
-                  <td>Tompson</td>
-                  <td>the_mark7</td>
-                </tr>
-                <tr>
-                  <td>Ashley</td>
-                  <td>Jacobs</td>
-                  <td>ash11927</td>
-                </tr>
-                <tr>
-                  <td>Audrey</td>
-                  <td>Ann</td>
-                  <td>audann84</td>
-                </tr>
-                <tr>
-                  <td>John</td>
-                  <td>Robinson</td>
-                  <td>jr5527</td>
-                </tr>
-                <tr>
-                  <td>Aaron</td>
-                  <td>Butler</td>
-                  <td>aaron_butler</td>
-                </tr>
-                <tr>
-                  <td>Chris</td>
-                  <td>Albert</td>
-                  <td>cab79</td>
-                </tr>
+                
               </tbody>
             </table>
             <p><a href="productlist">More...</a></p>

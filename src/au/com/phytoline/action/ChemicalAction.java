@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -140,7 +138,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	}
 
 	public String toAddChemical() throws Exception {
-		List supplierList = supplierService.getAllSupplier();	
+		List<?> supplierList = supplierService.getAllSupplier();	
 		
 		Supplier supplier;
 		List<String> supplierDate = new ArrayList<String>();
@@ -163,7 +161,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	}
 	public String toChemicalModify() throws Exception {
 		chemical = chemicalService.getChemicalById(cid);
-		List supplierList = supplierService.getAllSupplier();
+		List<?> supplierList = supplierService.getAllSupplier();
 		request.put("supplierList", supplierList);
 		request.put("chemical", chemical);
 		return "chemical_edit";
@@ -186,8 +184,8 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	}
 	
 	public String ajaxChemicalList()throws Exception {
-		List chemicalList = chemicalService.getAllChemicalByPage(1, 50);
-		List chemList = new ArrayList();
+		List<?> chemicalList = chemicalService.getAllChemicalByPage(1, 50);
+		List<Map<String, Object>> chemList = new ArrayList<Map<String, Object>>();
 		for(int i=0;i<chemicalList.size();i++){
 			Map<String,Object> chem =new HashMap<String, Object>();
 			chem.put("id", ((Chemical) chemicalList.get(i)).getCid());
@@ -199,6 +197,23 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 		//用这个的话会报错JSONObject json = JSONObject.fromObject(chemList);
 
 		//因为是List，所以是需要用JSONArray？
+		JSONArray json = JSONArray.fromObject(chemList);
+		result = json.toString();
+		return SUCCESS;
+	}
+	
+	public String ajaxHomeChemicalList()throws Exception {
+		//首页显示，只需要显示5行即可
+		List<?> chemicalList = chemicalService.getAllChemicalByPage(1, 5);
+		List<Map<String, Object>> chemList = new ArrayList<Map<String, Object>>();
+		for(int i=0;i<chemicalList.size();i++){
+			Map<String,Object> chem =new HashMap<String, Object>();
+			chem.put("id", ((Chemical) chemicalList.get(i)).getCid());
+			chem.put("name", ((Chemical) chemicalList.get(i)).getCname());
+			chem.put("price", ((Chemical) chemicalList.get(i)).getPrice());
+			chemList.add(chem);
+		}
+
 		JSONArray json = JSONArray.fromObject(chemList);
 		result = json.toString();
 		return SUCCESS;
