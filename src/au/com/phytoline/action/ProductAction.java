@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.RequestAware;
@@ -35,7 +34,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	Pager pager;
 	Product product;
 	ProductDetails productDetails;
-	List chemList;
+	List<?> chemList;
 	String result;
 
 	
@@ -54,10 +53,10 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public String getResult() {
 		return result;
 	}
-	public void setChemList(List chemList) {
+	public void setChemList(List<?> chemList) {
 		this.chemList = chemList;
 	}
-	public List getChemList() {
+	public List<?> getChemList() {
 		return chemList;
 	}
 	public Product getProduct() {
@@ -117,7 +116,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 		if (pager != null) {
 			curPage = pager.getCurPage();
 		}
-		List productList =null;
+		List<?> productList =null;
 		
 		productList=productService.getAllProductBypage(curPage, 10);
 		pager = productService.getCountOfProduct(10);
@@ -129,7 +128,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	
 	public String productDetails(){
 		Product product=productService.findProductById(pid);
-		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		List<?> productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
 		request.put("product", product);
 		request.put("productDetailses", productDetailses);
 		return "productDetails";
@@ -181,7 +180,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	
 	public String toProductModify(){
 		Product product = productService.findProductById(pid);
-		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		List<?> productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
 		chemList = chemicalService.getAllChemicalByPage(0, 100);
 		request.put("product", product);
 		request.put("productDetailses", productDetailses);
@@ -210,7 +209,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public String ajaxAllDetail(){
 		// 根据pid查询出product和它的details
 		Product product = productService.findProductById(pid);
-		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		List<?> productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
 		// 封装成JSON格式
 		
 		return "ajaxAllDetail";
@@ -256,7 +255,7 @@ public class ProductAction extends ActionSupport implements RequestAware,
 	public String deleteProduct(){
 		//根据pid查询出product对象，再根据product对象的pid查询出该product关联的details的list
 		Product product=productService.findProductById(pid);
-		List productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
+		List<?> productDetailses = productDetailsService.getDetailsByProductId(product.getPid());
 		//遍历details的list，将其删除
 		for(int i=0;i<productDetailses.size();i++){
 			ProductDetails details = new ProductDetails();

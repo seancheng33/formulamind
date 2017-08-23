@@ -1,7 +1,6 @@
 package au.com.phytoline.action;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +82,7 @@ public class SupplierAction extends ActionSupport implements SessionAware,
 		if (pager != null) {
 			curPage = pager.getCurPage();
 		}
-		List supplierList = null;
+		List<?> supplierList = null;
 		if (nameSearch == null) {
 			// 无查询条件，获取supplier的列表
 			supplierList = supplierService.getAllSupplierByPage(curPage, 10);

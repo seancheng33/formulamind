@@ -12,6 +12,7 @@ import au.com.phytoline.entity.User;
 import au.com.phytoline.service.UserService;
 
 public class UserAction extends ActionSupport implements SessionAware, RequestAware {
+	private static final long serialVersionUID = 1L;
 	User user;
 	UserService userService;
 
@@ -31,7 +32,7 @@ public class UserAction extends ActionSupport implements SessionAware, RequestAw
 	}
 
 	public String checkLogin() {
-		List list;
+		List<?> list;
 		User condition = new User();
 		condition = user;
 		if(user.getUname() == null||user.getUname().isEmpty()){

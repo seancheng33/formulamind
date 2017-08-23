@@ -36,28 +36,7 @@
             font-weight: bold;
         }
     </style>
-<script type="text/javascript">
-$(
-function loadchem() {
-	$.ajax({
-		type : "get",
-		url : "ajaxHomeChemicalList",
-		dataType : "json",
-		success : function(data) {
-			var d=eval("("+data+")");
-			
-			for (var key in d) { //循环取到各个d 
-				var chem = d[key];
-				$(".chemtable").append("<tr><td>"+chem.id+"</td><td>"+chem.name+"</td><td>"+chem.price+"</td></tr>");
-			}
-			
-		},
-		error : function() {
-			alert("System exception, try again later.")
-		}
-	});
-})
-</script>
+    
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="javascripts/html5.js"></script>
@@ -106,96 +85,102 @@ function loadchem() {
 
 <div class="row-fluid">
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Chemical</div>
+        <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Previons Batch</div>
         <div id="tablewidget" class="block-body collapse in">
-            <table class="chemtable">
+            <table class="table">
               <thead>
                 <tr>
-                  <th width="80">Chem ID</th>
-                  <th width="180">Chemical Name</th>
-                  <th width="50">Price</th>
+                  <th width="30">Batch NO</th>
+                  <th width="100">Product</th>
+                  <th width="50">Date</th>
+                  <th width="50">Quantity</th>
                 </tr>
               </thead>
               <tbody>
-                
+                <s:iterator id="batch" value="#request.batchList">
+							<tr>
+							<td>${batch.batchCode}</td>
+							<td>${batch.product.pname}</td>
+							<td>${batch.batchDate}</td>
+							<td>${batch.batchQuantity}</td>
+							</tr>
+			</s:iterator>
               </tbody>
             </table>
-            <p><a href="productlist">More...</a></p>
+            <p><a href="previonsBatchDetails">More...</a></p>
         </div>
     </div>
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#widget1container">Supplier </div>
+        <div class="block-heading" data-toggle="collapse" data-target="#widget1container">Production </div>
         <div id="widget1container" class="block-body collapse in">
-            <h2>Supplier</h2>
-
+            <table class="table">
+              <thead>
+                <tr>
+                  <th width="30">#</th>
+                  <th width="180">Product Name</th>
+                  <th width="150">Other Infomation</th>
+                </tr>
+              </thead>
+              <tbody>
+			<s:iterator id="product" value="#request.productList">
+							<tr>
+							<td>${product.pid}</td>
+							<td>${product.pname}</td>
+							<td>${product.pinfo}</td>
+							</tr>
+			</s:iterator>
+			 </tbody>
+            </table>
         </div>
     </div>
 </div>
 <div class="row-fluid">
     <div class="block span6">
-        <div class="block-heading" data-toggle="collapse" data-target="#widget2container">History Batch<span class="label label-warning">+10</span></div>
+        <div class="block-heading" data-toggle="collapse" data-target="#widget2container">Chemical</div>
         <div id="widget2container" class="block-body collapse in">
             <table class="table">
+              <thead>
+                <tr>
+                  <th width="20">#</th>
+                  <th width="180">Chemical Name</th>
+                  <th width="50">Price</th>
+                </tr>
+              </thead>
               <tbody>
-                  <tr>
-                      <td>
-                          <p><i class="icon-user"></i> Mark Otto</p>
-                      </td>
-                      <td>
-                          <p>Amount: $1,247</p>
-                      </td>
-                      <td>
-                          <p>Date: 7/19/2012</p>
-                          <a href="#">View Transaction</a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <p><i class="icon-user"></i> Audrey Ann</p>
-                      </td>
-                      <td>
-                          <p>Amount: $2,793</p>
-                      </td>
-                      <td>
-                          <p>Date: 7/12/2012</p>
-                          <a href="#">View Transaction</a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <p><i class="icon-user"></i> Mark Tompson</p>
-                      </td>
-                      <td>
-                          <p>Amount: $2,349</p>
-                      </td>
-                      <td>
-                          <p>Date: 3/10/2012</p>
-                          <a href="#">View Transaction</a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <p><i class="icon-user"></i> Ashley Jacobs</p>
-                      </td>
-                      <td>
-                          <p>Amount: $1,192</p>
-                      </td>
-                      <td>
-                          <p>Date: 1/19/2012</p>
-                          <a href="#">View Transaction</a>
-                      </td>
-                  </tr>
-                    
+                <s:iterator id="chemical" value="#request.chemicalList">
+							<tr>
+							<td>${chemical.cid}</td>
+							<td>${chemical.cname}</td>
+							<td>${chemical.price}</td>
+							</tr>
+			</s:iterator>
               </tbody>
             </table>
         </div>
     </div>
     <div class="block span6">
-        <p class="block-heading">Not Collapsible</p>
-        <div class="block-body">
-            <h2>Tip of the Day</h2>
-            <p>Fava bean jícama seakale beetroot courgette shallot amaranth pea garbanzo carrot radicchio peanut leek pea sprouts arugula brussels sprout green bean. Spring onion broccoli chicory shallot winter purslane pumpkin gumbo cabbage squash beet greens lettuce celery. Gram zucchini swiss chard mustard burdock radish brussels sprout groundnut. Asparagus horseradish beet greens broccoli brussels sprout bitterleaf groundnut cress sweet pepper leek bok choy shallot celtuce scallion chickpea radish pea sprouts.</p>
-            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+        <div class="block-heading" data-toggle="collapse" data-target="#widget3container">Supplier</div>
+        <div id="widget3container" class="block-body collapse in">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th width="20">ID</th>
+                  <th width="180">Supplier Name</th>
+                  <th width="80">Phone</th>
+                  <th width="50">Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+			<s:iterator id="supplier" value="#request.supplierList">
+							<tr>
+							<td>${supplier.sid}</td>
+							<td>${supplier.sname}</td>
+							<td>${supplier.phone}</td>
+							<td>${supplier.contact}</td>
+							</tr>
+			</s:iterator>
+			 </tbody>
+            </table>
         </div>
     </div>
 </div>

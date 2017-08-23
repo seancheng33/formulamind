@@ -90,15 +90,7 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	public void setChemical(Chemical chemical) {
 		this.chemical = chemical;
 	}
-
-	Map<String, Object> session;
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	Map<String, Object> request;
+	
 	int cid;
 
 	public int getCid() {
@@ -108,6 +100,14 @@ public class ChemicalAction extends ActionSupport implements RequestAware,
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
+	Map<String, Object> session;
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	Map<String, Object> request;
 
 	@Override
 	public void setRequest(Map<String, Object> request) {

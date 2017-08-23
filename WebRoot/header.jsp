@@ -16,7 +16,7 @@
                     </li>
                     
                 </ul>
-                <a class="brand" href="index.jsp"><span class="first">Formula and Production</span> <span class="second">Managemnet</span></a>
+                <a class="brand" href="home"><span class="first">Formula and Production</span> <span class="second">Managemnet</span></a>
             </div>
         </div>
     </div>

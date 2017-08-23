@@ -142,5 +142,13 @@
 	<bean id="userAction" class="au.com.phytoline.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>
-	<!-- -->
+	<!-- home -->
+		<bean id="welcomeAction" class="au.com.phytoline.action.WelcomeAction" scope="prototype">
+		<property name="batchService" ref="batchService" />
+		<property name="productService" ref="productService" />
+		<property name="productDetailsService" ref="productDetailsService" />
+		<property name="batchDetailsService" ref="batchDetailsService"/>
+		<property name="chemicalService" ref="chemicalService" />
+		<property name="supplierService" ref="supplierService" />
+	</bean>
 </beans> 

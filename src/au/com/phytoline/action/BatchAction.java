@@ -15,8 +15,6 @@ import au.com.phytoline.service.BatchDetailsService;
 import au.com.phytoline.service.BatchService;
 import au.com.phytoline.service.ProductDetailsService;
 import au.com.phytoline.service.ProductService;
-import au.com.phytoline.util.PagerNumber;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BatchAction extends ActionSupport implements RequestAware,
@@ -82,7 +80,7 @@ public class BatchAction extends ActionSupport implements RequestAware,
 	}
 
 	public String toAddBatch(){
-		List productList = productService.getAllProduct();
+		List<?> productList = productService.getAllProduct();
 		int serials =batchService.getLastBatchSerials()+1;
 		request.put("productList",productList);
 		request.put("serials",serials);
@@ -92,7 +90,7 @@ public class BatchAction extends ActionSupport implements RequestAware,
 		Product product=productService.findProductById(pid);
 		batch.setProduct(product);
 		batchService.addBatch(batch);
-		List chemList = productDetailsService.getDetailsByProductId(pid);
+		List<?> chemList = productDetailsService.getDetailsByProductId(pid);
 		for(int i=0;i<chemList.size();i++){
 			batchDetails = new BatchDetails();
 		batchDetails.setBserials(batch.getBatchSerials());
@@ -107,7 +105,7 @@ public class BatchAction extends ActionSupport implements RequestAware,
 		return "batchadd";
 	}
 	public String previonsBatchDetails(){
-		List batchList=batchService.getAllBatchByPager(1, 10);
+		List<?> batchList=batchService.getAllBatchByPager(1, 10);
 		request.put("batchList", batchList);
 		return "previonsBatchDetails";
 	}

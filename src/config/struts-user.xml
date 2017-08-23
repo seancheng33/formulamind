@@ -5,7 +5,7 @@
 	<package name="user" extends="formulamind" namespace="/">
 		<default-interceptor-ref name="defaultStack" />
 		<action name="checkLogin" class="userAction" method="checkLogin">
-			<result name="login">index.jsp</result>
+			<result name="login" type="redirectAction">home</result>
 			<result name="retry">sign-in.jsp</result>
 		</action>
 		<action name="logOut" class="userAction" method="logOut">

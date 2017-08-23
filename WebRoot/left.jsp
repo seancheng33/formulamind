@@ -5,7 +5,7 @@
 			<i class="icon-dashboard"></i>FormulaMind
 		</div>
 		<ul id="dashboard-menu" class="nav nav-list collapse in">
-			<li><a href="index.jsp">Home</a></li>
+			<li><a href="home">Home</a></li>
 			<li><a href="toAddBatch">Make A New Batch</a></li>
 			<li><a href="previonsBatchDetails">View Previons Batch Details</a></li>
 			<li><a href="productlist">Product Manager</a></li>

@@ -20,7 +20,7 @@
 		</global-results>
 	</package>
 	
-	
+	<include file="config/struts-welcome.xml"></include>
 	<include file="config/struts-supplier.xml"></include>
 	<include file="config/struts-chemical.xml"></include>
 	<include file="config/struts-product.xml"></include>
