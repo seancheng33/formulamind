@@ -5,19 +5,19 @@
 	<package name="chemical" extends="formulamind,json-default"
 		namespace="/">
 		<action name="chemicallist" class="chemicalAction" method="chemicalList">
-			<result name="chemicallist">chemical/list.jsp</result>
+			<result name="chemicallist">WEB-INF/chemical/list.jsp</result>
 		</action>
 		<action name="toAddChemical" class="chemicalAction" method="toAddChemical">
-			<result name="chemical_add">chemical/add.jsp</result>
+			<result name="chemical_add">WEB-INF/chemical/add.jsp</result>
 		</action>
 		<action name="addChemical" class="chemicalAction" method="addChemical">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>
 		</action>
 		<action name="chemicalDetails" class="chemicalAction" method="chemicalDetails">
-			<result name="chemicalDetails">chemical/details.jsp</result>
+			<result name="chemicalDetails">WEB-INF/chemical/details.jsp</result>
 		</action>
 		<action name="toChemicalModify" class="chemicalAction" method="toChemicalModify">
-			<result name="chemical_edit">chemical/update.jsp</result>
+			<result name="chemical_edit">WEB-INF/chemical/update.jsp</result>
 		</action>
 		<action name="doChemicalModify" class="chemicalAction" method="doChemicalModify">
 			<result name="chemicallist" type="redirectAction">chemicallist</result>

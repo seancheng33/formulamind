@@ -1,13 +1,11 @@
 package au.com.phytoline.entity;
 
-/**
- * Chemical entity. @author MyEclipse Persistence Tools
- */
 
 public class Chemical implements java.io.Serializable {
 
 	// Fields
-
+	
+	private static final long serialVersionUID = 1438203747342327666L;
 	private Integer cid;
 	private Supplier supplier;
 	private String cname;

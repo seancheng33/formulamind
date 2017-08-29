@@ -16,7 +16,7 @@
         <property name="pcode" type="java.lang.String">
             <column name="pcode" length="10" />
         </property>
-        <property name="pdate" type="java.util.Date">
+        <property name="pdate" type="java.sql.Date">
             <column name="pdate" length="10" />
         </property>
         <property name="pinfo" type="java.lang.String">

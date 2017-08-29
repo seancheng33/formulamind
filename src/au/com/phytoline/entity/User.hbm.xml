@@ -16,5 +16,8 @@
         <property name="upassword" type="java.lang.String">
             <column name="upassword" length="50" />
         </property>
+        <property name="lastlogin" type="java.util.Date">
+            <column name="lastlogin" length="50" />
+        </property>
     </class>
 </hibernate-mapping>

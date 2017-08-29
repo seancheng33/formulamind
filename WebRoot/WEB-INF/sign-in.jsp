@@ -77,8 +77,7 @@
             </div>
         </div>
         <p class="pull-right" style=""><a href="#" target="blank">Program by Sean Cheng</a></p>
-        
-        <p><a href="reset-password.html">Forgot your password?</a></p>
+<!--         <p><a href="reset-password.html">Forgot your password?</a></p> -->
     </div>
 </div>
     <script src="lib/bootstrap/js/bootstrap.js"></script>

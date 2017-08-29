@@ -6,10 +6,10 @@
 		<default-interceptor-ref name="defaultStack" />
 		<action name="checkLogin" class="userAction" method="checkLogin">
 			<result name="login" type="redirectAction">home</result>
-			<result name="retry">sign-in.jsp</result>
+			<result name="retry">WEB-INF/sign-in.jsp</result>
 		</action>
 		<action name="logOut" class="userAction" method="logOut">
-			<result name="logout">sign-in.jsp</result>
+			<result name="logout">WEB-INF/sign-in.jsp</result>
 		</action>
 	</package>
 </struts>

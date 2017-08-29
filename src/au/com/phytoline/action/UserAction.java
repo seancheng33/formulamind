@@ -1,5 +1,6 @@
 package au.com.phytoline.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,10 @@ public class UserAction extends ActionSupport implements SessionAware, RequestAw
 			//校验成功后的对象需要保存到session中，完成登录
 			//拦截器是根据session中有没有LoginUser的对象决定拦截
 			session.put("LoginUser", condition);
+			//将登陆时间更新到表中,
+			condition.setUid(userService.getUserIdByName(condition.getUname()));
+			condition.setLastlogin(new Date());
+			userService.updateLoginDate(condition);
 			return "login";
 		} else {
 			request.put("LoginTip", "Incorrect username or password!");

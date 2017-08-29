@@ -1,13 +1,10 @@
 package au.com.phytoline.entity;
 
-/**
- * BatchDetails entity. @author MyEclipse Persistence Tools
- */
-
 public class BatchDetails implements java.io.Serializable {
 
 	// Fields
 
+	private static final long serialVersionUID = 7070994756662384079L;
 	private Integer bdid;
 	private Integer bserials;
 	private String pname;

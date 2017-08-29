@@ -4,7 +4,7 @@
 	<!-- 首页的action包 -->
 	<package name="welcome" extends="formulamind" namespace="/">
 		<action name="home" class="welcomeAction" method="home">
-			<result name="home">index.jsp</result>
+			<result name="home">WEB-INF/index.jsp</result>
 		</action>
 	</package>
 </struts>

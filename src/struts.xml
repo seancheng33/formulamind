@@ -16,7 +16,7 @@
 		</interceptors>
 		<default-interceptor-ref name="loginStack"/>
 		<global-results>
-			<result name="error">sign-in.jsp</result>
+			<result name="error">WEB-INF/sign-in.jsp</result>
 		</global-results>
 	</package>
 	

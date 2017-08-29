@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService {
 		return userDAO.login(condition);
 	}
 
+	@Override
+	public void updateLoginDate(User condition) {
+		userDAO.updateLoginDate(condition);
+	}
+
+	@Override
+	public Integer getUserIdByName(String name) {
+		return userDAO.getUserIdByName(name);
+	}
+
 }

@@ -4,17 +4,17 @@
 <!-- supplier的action包 -->
 	<package name="supplier" extends="formulamind" namespace="/">
 		<action name="supplierlist" class="supplierAction" method="supplierList">
-			<result name="supplierlist">supplier/list.jsp</result>
+			<result name="supplierlist">WEB-INF/supplier/list.jsp</result>
 		</action>
 		<action name="toaddSupplier" class="supplierAction" method="toAddSupplier">
-			<result name="supplier_add">supplier/add.jsp</result>
+			<result name="supplier_add">WEB-INF/supplier/add.jsp</result>
 		</action>
 		<action name="addSupplier" class="supplierAction" method="addSupplier">
 			<result name="supplierlist" type="redirectAction">supplierlist</result>
-			<result name="error">supplier/add.jsp</result>
+			<result name="error">WEB-INF/supplier/add.jsp</result>
 		</action>
 		<action name="toSupplierModify" class="supplierAction" method="toSupplierModify">
-			<result name="supplier_modify">supplier/update.jsp</result>
+			<result name="supplier_modify">WEB-INF/supplier/update.jsp</result>
 		</action>
 		<action name="doSupplierModify" class="supplierAction" method="doSupplierModify">
 			<result name="supplierlist" type="redirectAction">supplierlist</result>
@@ -23,7 +23,7 @@
 			<result name="supplierlist" type="redirectAction">supplierlist</result>
 		</action>
 		<action name="supplierDetails" class="supplierAction" method="supplierDetails">
-			<result name="supplierDetails">supplier/details.jsp</result>
+			<result name="supplierDetails">WEB-INF/supplier/details.jsp</result>
 		</action>
 	</package>
 </struts>

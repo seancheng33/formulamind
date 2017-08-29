@@ -1,5 +1,7 @@
 package au.com.phytoline.entity;
 
+import java.util.Date;
+
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
@@ -11,6 +13,7 @@ public class User implements java.io.Serializable {
 	private Integer uid;
 	private String uname;
 	private String upassword;
+	private Date lastlogin;
 
 	// Constructors
 
@@ -48,6 +51,14 @@ public class User implements java.io.Serializable {
 
 	public void setUpassword(String upassword) {
 		this.upassword = upassword;
+	}
+
+	public Date getLastlogin() {
+		return lastlogin;
+	}
+
+	public void setLastlogin(Date lastlogin) {
+		this.lastlogin = lastlogin;
 	}
 
 }

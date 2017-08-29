@@ -2,14 +2,10 @@ package au.com.phytoline.entity;
 
 import java.util.Date;
 
-/**
- * Batch entity. @author MyEclipse Persistence Tools
- */
-
 public class Batch implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = -1359638526878098340L;
 	private Integer bid;
 	private Product product;
 	private Integer batchSerials;

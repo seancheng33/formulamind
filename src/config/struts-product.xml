@@ -5,22 +5,22 @@
 	<package name="product" extends="formulamind,json-default"
 		namespace="/">
 		<action name="productlist" class="productAction" method="productList">
-			<result name="productlist">production/list.jsp</result>
+			<result name="productlist">WEB-INF/production/list.jsp</result>
 		</action>
 		<action name="productDetails" class="productAction" method="productDetails">
-			<result name="productDetails">production/details.jsp</result>
+			<result name="productDetails">WEB-INF/production/details.jsp</result>
 		</action>
 		<action name="addProduct" class="productAction" method="addProduct">
 			<result name="productlist" type="redirectAction">productlist</result>
 		</action>
 		<action name="toAddProduct" class="productAction" method="toAddProduct">
-			<result name="addProduct">production/add.jsp</result>
+			<result name="addProduct">WEB-INF/production/add.jsp</result>
 		</action>
 		<action name="doAddProduct" class="productAction" method="doAddProduct">
 			<result name="productlist" type="json">productlist</result>
 		</action>
 		<action name="toProductModify" class="productAction" method="toProductModify">
-			<result name="updateProduct">production/update.jsp</result>
+			<result name="updateProduct">WEB-INF/production/update.jsp</result>
 		</action>
 		<action name="doProductModify" class="productAction" method="doProductModify">
 			<result name="productlist" type="json">productlist</result>
